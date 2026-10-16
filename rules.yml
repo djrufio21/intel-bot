@@ -1,0 +1,77 @@
+# Your Telegram intel bot: where it reads from and what it alerts on.
+# Edit on github.com (pencil icon) and commit. Changes apply on the next run.
+
+sources:
+  malaysia:
+    name: Malaysia Daily Brief
+    data: https://raw.githubusercontent.com/djrufio21/malaysia-daily-brief/main/docs/latest.json
+    page: https://djrufio21.github.io/malaysia-daily-brief/
+  threat:
+    name: Cyber Threat Brief
+    data: https://raw.githubusercontent.com/djrufio21/cyber-threat-brief/main/docs/latest.json
+    page: https://djrufio21.github.io/cyber-threat-brief/
+  policy:
+    name: APAC Cyber Policy Tracker
+    data: https://raw.githubusercontent.com/djrufio21/apac-cyber-policy-tracker/main/docs/latest.json
+    page: https://djrufio21.github.io/apac-cyber-policy-tracker/
+
+# No alerts between these hours (Malaysia time). Anything caught overnight
+# is included in the 7 AM message instead.
+quiet_hours: { start: 23, end: 7 }
+
+# Ignore anything older than this when deciding whether to alert.
+alert_max_age_hours: 36
+
+# At most this many alerts per check, so a busy hour never floods your phone.
+max_alerts_per_run: 5
+
+# The optional AI summary in the morning message. Needs the ANTHROPIC_API_KEY secret.
+ai_model: claude-sonnet-5-5
+
+# Words that make a Malaysia story "big news" for the morning message. Each match scores a point;
+# the two highest-scoring stories are shown, newest first on a tie.
+malaysia_priority: 'anwar|prime minister|\bpm\b|cabinet|budget|parliament|dewan rakyat|agong|king\b|sultan|minister|bank negara|ringgit|opr\b|flood|haze|landslide|election|by-election|federal court|court of appeal|macc|police|igp|petronas|tariff|subsid|gst|sst|minimum wage|cyber|scam|data breach|outage|death toll|killed'
+
+# Vendors whose exploited flaws are worth a ping. Regular expression, case-insensitive.
+major_vendors: 'microsoft|cisco|fortinet|palo alto|ivanti|citrix|vmware|broadcom|apple|google|chrome|android|juniper|huawei|oracle|sap\b|f5\b|check point|sonicwall|atlassian|progress|moveit|veeam|zyxel|d-link|tp-link|samsung|qualcomm|linux kernel|openssh|exchange|fortios|pan-os'
+
+# Each rule: which source and sections to watch, and what an item must match.
+#   all_tags / any_tags   tags the item must have (all of / at least one of)
+#   text_all              regular expressions that must ALL match the headline or summary
+#   vendor                regular expression on the vendor (CISA KEV entries only)
+#   countries_any         for policy items: at least one of these countries
+alerts:
+  - name: Exploited flaw in a major vendor
+    icon: "🔴"
+    source: threat
+    sections: [Actively Exploited]
+    vendor: major_vendors
+
+  - name: Exploited flaw used by ransomware
+    icon: "🔴"
+    source: threat
+    sections: [Actively Exploited]
+    all_tags: [Ransomware]
+
+  - name: Zero-day in a major vendor
+    icon: "🟠"
+    source: threat
+    sections: [Breaking Threats]
+    all_tags: [Zero-day]
+    text_all: [major_vendors]
+
+  - name: Attack on an APAC telco or bank
+    icon: "🟠"
+    source: threat
+    sections: [Breaking Threats, APAC Watch]
+    any_tags: [APAC]
+    text_all:
+      - 'ransomware|cyber ?attack|breach|hack|outage|data leak|ddos'
+      - 'telco|telecom|mobile operator|carrier|operator|bank|banking|financial|insurer|payment|e-wallet|exchange'
+
+  - name: New cyber law or consultation in Malaysia or Singapore
+    icon: "🔵"
+    source: policy
+    sections: [Malaysia, Singapore, Financial Sector]
+    any_tags: [New law, Consultation]
+    countries_any: [Malaysia, Singapore]
