@@ -32,6 +32,12 @@ LIMIT = 4000  # Telegram allows 4096 characters per message
 
 # ---------- plumbing ----------
 
+def fail(message):
+    """Stop with a message that shows on the run's summary page in GitHub."""
+    print(f"::error::{message}")
+    sys.exit(1)
+
+
 def http_json(url, payload=None, headers=None, timeout=30):
     data = json.dumps(payload).encode() if payload is not None else None
     req = urllib.request.Request(url, data=data, headers={**UA, **(headers or {}),
@@ -43,18 +49,18 @@ def http_json(url, payload=None, headers=None, timeout=30):
 def telegram(method, **params):
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     if not token:
-        sys.exit("TELEGRAM_BOT_TOKEN secret is missing. See the README, step 2.")
+        fail("TELEGRAM_BOT_TOKEN secret is missing. See the README, step 2.")
     try:
         return http_json(f"https://api.telegram.org/bot{token}/{method}", params)
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode(errors="replace")[:300]
-        sys.exit(f"Telegram refused {method}: HTTP {exc.code} {detail}")
+        fail(f"Telegram refused {method}: HTTP {exc.code} {detail}")
 
 
 def send(text, chat_id=None):
     chat_id = chat_id or os.environ.get("TELEGRAM_CHAT_ID", "").strip()
     if not chat_id:
-        sys.exit("TELEGRAM_CHAT_ID secret is missing. Run the 'Connect Telegram' workflow first.")
+        fail("TELEGRAM_CHAT_ID secret is missing. Run the 'Connect Telegram' workflow first.")
     if len(text) > LIMIT:
         text = text[:LIMIT].rsplit("\n", 1)[0] + "\n…"
     telegram("sendMessage", chat_id=chat_id, text=text, parse_mode="HTML", disable_web_page_preview=True)
@@ -188,7 +194,7 @@ def in_quiet_hours(config):
 def run_alerts(config):
     data, _ = load_sources(config)
     if not data:
-        sys.exit("No sources could be loaded.")
+        fail("No sources could be loaded.")
     state = load_state()
     stamp = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
     alerts = find_alerts(config, data, state)
@@ -359,7 +365,7 @@ def run_connect():
         if chat.get("type") == "private" and msg.get("date", 0) >= cutoff:
             chats[chat["id"]] = chat
     if not chats:
-        sys.exit(f"No recent messages found. Open Telegram, search for @{me['username']}, "
+        fail(f"No recent messages found. Open Telegram, search for @{me['username']}, "
                  "press Start (or send it any message), then run this workflow again within an hour.")
     for chat_id in chats:
         send(f"👋 Found you. Your chat ID is:\n\n<code>{chat_id}</code>\n\n"
