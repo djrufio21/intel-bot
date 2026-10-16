@@ -34,6 +34,16 @@ Secrets are encrypted. They never appear in the code, the logs or this page.
 ### 4. Optional: AI summary
 Add a secret `ANTHROPIC_API_KEY` with a key from https://console.anthropic.com. The morning brief then includes a short "Why it matters" paragraph. It costs a few cents a day. Without the key, everything else still works.
 
+### 5. Optional: share with friends through a channel
+1. In Telegram, create a **New Channel** (for example "Cyber Intel Brief"). Private is fine.
+2. Open the channel's settings → **Administrators → Add Admin**, choose your bot, and allow **Post Messages**.
+3. Post anything in the channel (so the bot sees it), then run **Actions → Connect Telegram**.
+4. The bot sends you the channel's ID privately. Add it as the secret `TELEGRAM_CHANNEL_ID`.
+5. Run **Connect Telegram** once more. The channel gets a "connected" message.
+6. Share the channel's invite link with friends.
+
+You keep your personal messages. The channel gets the same brief and alerts, with the greeting set by `channel_greeting` in `rules.yml`. Friends never need GitHub, and you never handle their numbers.
+
 ## Using it
 * **Get the brief now:** Actions → Morning brief → Run workflow
 * **Check for alerts now:** Actions → Alerts → Run workflow

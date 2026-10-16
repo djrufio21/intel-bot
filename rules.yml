@@ -15,6 +15,9 @@ sources:
     data: https://raw.githubusercontent.com/djrufio21/apac-cyber-policy-tracker/main/docs/latest.json
     page: https://djrufio21.github.io/apac-cyber-policy-tracker/
 
+# Greeting used in the shared channel (your personal message still says "Good morning, Raj").
+channel_greeting: Good morning from the Cyber Intel Brief
+
 # No alerts between these hours (Malaysia time). Anything caught overnight
 # is included in the 7 AM message instead.
 quiet_hours: { start: 23, end: 7 }

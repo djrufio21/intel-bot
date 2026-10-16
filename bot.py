@@ -66,6 +66,17 @@ def send(text, chat_id=None):
     telegram("sendMessage", chat_id=chat_id, text=text, parse_mode="HTML", disable_web_page_preview=True)
 
 
+def channel_id():
+    return os.environ.get("TELEGRAM_CHANNEL_ID", "").strip()
+
+
+def broadcast(text):
+    """Send to you, and to the shared channel if one is set up."""
+    send(text)
+    if channel_id():
+        send(text, channel_id())
+
+
 def e(text):
     return html.escape(str(text or ""), quote=False)
 
@@ -218,7 +229,7 @@ def run_alerts(config):
         print(f"Quiet hours: holding {len(alerts)} alert(s) for the morning message.")
     else:
         header = "⚡ <b>Alert</b>" if len(alerts) == 1 else f"⚡ <b>{len(alerts)} alerts</b>"
-        send(header + "\n\n" + "\n\n".join(format_alert(a) for a in alerts))
+        broadcast(header + "\n\n" + "\n\n".join(format_alert(a) for a in alerts))
         print(f"Sent {len(alerts)} alert(s).")
     save_state(state)
 
@@ -261,10 +272,10 @@ def ai_summary(config, picks):
         return ""
 
 
-def morning_message(config, data, problems, state):
+def morning_message(config, data, problems, state, greeting="Good morning, Raj"):
     today = dt.datetime.now(MYT)
     src = config["sources"]
-    out = [f"☀️ <b>Good morning, Raj</b> · {today:%a %-d %b}"]
+    out = [f"☀️ <b>{e(greeting)}</b> · {today:%a %-d %b}"]
     picks = []
 
     # Most important = covered by the most outlets, then most national-importance keywords, then newest
@@ -340,6 +351,9 @@ def run_morning(config, preview=False):
         print(message)
         return
     send(message)
+    if channel_id():
+        send(morning_message(config, data, problems, state,
+                             config.get("channel_greeting", "Good morning")), channel_id())
     state["held"] = []
     state["last_morning"] = dt.datetime.now(MYT).date().isoformat()
     save_state(state)
@@ -354,6 +368,26 @@ def run_connect():
         send("✅ <b>Connected.</b> Your intel bot can reach you. The morning brief arrives at 7 AM "
              "and alerts come as they happen.", configured)
         print("Test message sent to the configured chat.")
+        if channel_id():
+            send("✅ <b>This channel is connected.</b> The morning brief arrives here at 7 AM, "
+                 "and alerts as they happen.", channel_id())
+            send("✅ Your channel is connected too.", configured)
+            print("Test message sent to the channel.")
+            return
+        # Look for channels the bot was recently added to, and tell you their ID privately
+        cutoff = dt.datetime.now(dt.timezone.utc).timestamp() - 86400
+        channels = {}
+        for u in telegram("getUpdates").get("result", []):
+            event = u.get("my_chat_member") or u.get("channel_post") or {}
+            chat = event.get("chat") or {}
+            if chat.get("type") == "channel" and event.get("date", 0) >= cutoff:
+                channels[chat["id"]] = chat.get("title", "your channel")
+        for cid, title in channels.items():
+            send(f"📣 Found the channel <b>{e(title)}</b>. Its ID is:\n\n<code>{cid}</code>\n\n"
+                 "Add it in GitHub as the secret <b>TELEGRAM_CHANNEL_ID</b>, then run "
+                 "<b>Connect Telegram</b> once more.", configured)
+        if channels:
+            print(f"Sent {len(channels)} channel ID(s) to you in Telegram.")
         return
     me = telegram("getMe")["result"]
     updates = telegram("getUpdates").get("result", [])
