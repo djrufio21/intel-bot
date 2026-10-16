@@ -390,4 +390,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit:
+        raise
+    except Exception as exc:  # make unexpected errors visible on the run page
+        fail(f"{type(exc).__name__}: {exc}")
