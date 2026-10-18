@@ -8,6 +8,15 @@
    "rule": "Attack on an APAC telco or bank",
    "source": "Bitcoinist.com",
    "title": "South Korea Names Gopax Operator In Cyberattack Wave Affecting 16 Firms | Bitcoinist.com"
+  },
+  {
+   "detail": "",
+   "icon": "\ud83d\udfe0",
+   "id": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQTFJ4NFJRcU1KMnpiVnZENEdEdXBRTmswTFMzQ1ZlVTJZVWI4UEh6TWlFOVpxMXdGUUUxWWR3Y0ZEckNPVHczWGYwY3FqWERfekxueW8xdnZZS0l6RmZjdnlTWm1sTE9ZQU9yTFUwenFQN1QtWW9NOUpaZFNQTlVGallvU3ZDN1BxSmd1THduTEJwSzJOR0dWNVB2dlFsRXBaU3JRdlB3Z1NocWhSZEdZQklkcHpILW42RTEzOUl5cm1jWnhnVTdENklUQVg0VjlRTHYxckxOMFFMSGV2RV9GU0tfbGxSV1lDVmRoaUNQcDg?oc=5",
+   "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQTFJ4NFJRcU1KMnpiVnZENEdEdXBRTmswTFMzQ1ZlVTJZVWI4UEh6TWlFOVpxMXdGUUUxWWR3Y0ZEckNPVHczWGYwY3FqWERfekxueW8xdnZZS0l6RmZjdnlTWm1sTE9ZQU9yTFUwenFQN1QtWW9NOUpaZFNQTlVGallvU3ZDN1BxSmd1THduTEJwSzJOR0dWNVB2dlFsRXBaU3JRdlB3Z1NocWhSZEdZQklkcHpILW42RTEzOUl5cm1jWnhnVTdENklUQVg0VjlRTHYxckxOMFFMSGV2RV9GU0tfbGxSV1lDVmRoaUNQcDg?oc=5",
+   "rule": "Attack on an APAC telco or bank",
+   "source": "QSR Media Asia",
+   "title": "Weekly Global Wrap: KFC switches soda supplier; DPE could hand markets to new operators; Burger King Japan confirms data breach"
   }
  ],
  "last_morning": "2026-10-18",
@@ -17,6 +26,7 @@
   "CVE-2026-0322": "2026-10-16T10:35:53+00:00",
   "CVE-2026-21589": "2026-10-16T10:35:53+00:00",
   "CVE-2026-76519": "2026-10-16T10:35:53+00:00",
+  "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQTFJ4NFJRcU1KMnpiVnZENEdEdXBRTmswTFMzQ1ZlVTJZVWI4UEh6TWlFOVpxMXdGUUUxWWR3Y0ZEckNPVHczWGYwY3FqWERfekxueW8xdnZZS0l6RmZjdnlTWm1sTE9ZQU9yTFUwenFQN1QtWW9NOUpaZFNQTlVGallvU3ZDN1BxSmd1THduTEJwSzJOR0dWNVB2dlFsRXBaU3JRdlB3Z1NocWhSZEdZQklkcHpILW42RTEzOUl5cm1jWnhnVTdENklUQVg0VjlRTHYxckxOMFFMSGV2RV9GU0tfbGxSV1lDVmRoaUNQcDg?oc=5": "2026-10-18T21:53:07+00:00",
   "https://news.google.com/rss/articles/CBMidkFVX3lxTE1idG52Z2ZDMkQ1SkFKaEhVUlNaaGdYamJ1N1ZxMGdOYkhkNkg5b0h6RWNhZy1iR29CRi1ER3hVUHc2WFI0OVE3Xzh5QmZzR2hSVDNZNDJQdEhzZ3lEY1pMZlBYY0xROXI0V1EwMUtHaDJaS2hOa3c?oc=5": "2026-10-16T10:35:53+00:00",
   "https://news.google.com/rss/articles/CBMiekFVX3lxTFBxVmpjNFd3azNiY3BZRnZmOU5rQXJ5YkN6VWNyazJFQkp2YVFqb1BhbnQ3bER4N29Ramx0czdzc3BXaGhEUXQ1Y2xpNGNaSWRBY2ZkZjRldWdFNTBPcjZmTWNxa0F4Nm40M3V3aVJaZE51QWhFdU9hZC130gF_QVVfeXFMT1N1aWY2dmFfU0MwclVqelJUWXBkZjIzX08yN1RtRHRSZUdLV3RENjk0UkozUGkxRXozTmVkTWFvdVpwcUF3bjdGVUxxUHdzMGlWNFRUT3dlQUx3R01zWTdtdlpGMGxDZFNYak5TWk5LT3JMSGtsVTRONWVZMVZZYw?oc=5": "2026-10-18T19:39:12+00:00",
   "https://news.google.com/rss/articles/CBMikgFBVV95cUxQcUx5MEc5clNMUUJHcWRxSmd0RHg5Z1RmNVZpNU5Nc2htaTRGX1dhRTlNbXBwb0tUalViaGhIVG9qYTd6Z0JoTVRMTWRxQUpENUpNcmxFNnVfMmpKMjlwZmJhZTN3cWZyd2JTdjNrRG01Rm9pWXFIOEp3ajg2QkRxMzZSSXlRYnEwS2EySnYzSkljdw?oc=5": "2026-10-16T10:35:53+00:00",
