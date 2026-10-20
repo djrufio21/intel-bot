@@ -1,10 +1,15 @@
 # Cloudflare Worker that answers your Grab requests in Telegram.
-# Deployed by .github/workflows/grab-deploy.yml. Secrets are set there, never here.
+# Deployed to the raj-intel.workers.dev account. Settings reach it through the
+# "Connect Grab helper" workflow, never through this file.
 
 name = "intel-bot-grab"
 main = "worker.js"
 compatibility_date = "2026-10-01"
 workers_dev = true
+
+[[kv_namespaces]]
+binding = "CONFIG"
+id = "b191a2b47c374b0c882ea7f5d25ac78c"
 
 [vars]
 AI_MODEL = "claude-haiku-5-5"

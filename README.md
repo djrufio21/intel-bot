@@ -56,32 +56,28 @@ Message the bot what you want and it prepares the trip in Grab. You confirm and 
 
 The reply has an **Open in Grab** button with pickup and drop-off filled in. With no pickup named, Grab uses your phone's location.
 
-The morning brief and alerts run on GitHub Actions, which can't answer messages instantly. The Grab helper therefore runs as a small Cloudflare Worker (free plan is plenty), deployed from the `grab/` folder by GitHub Actions.
+The morning brief and alerts run on GitHub Actions, which can't answer messages instantly. The Grab helper therefore runs as a small Cloudflare Worker (free plan) at `intel-bot-grab.raj-intel.workers.dev`, with its code in the `grab/` folder. The Worker never holds the bot token: it answers inside Telegram's own request.
 
-### Setup (once)
-1. Create a free account at https://dash.cloudflare.com. Copy your **Account ID** (shown on the Workers & Pages overview page).
-2. **My Profile → API Tokens → Create Token → "Edit Cloudflare Workers" template → Create.** Copy the token.
-3. Add two repository secrets: `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`.
-4. Optional but recommended, saved places as a secret named `GRAB_PLACES` (a secret, because this repo is public):
-   ```json
-   {
-     "home":   {"label": "Home", "lat": 3.1390, "lng": 101.6869},
-     "office": {"label": "Office", "lat": 3.1100, "lng": 101.6650},
-     "airport":{"label": "KLIA Terminal 1", "lat": 2.7456, "lng": 101.7072}
-   }
-   ```
-   Get coordinates by long-pressing a spot in Google Maps.
-5. **Actions → Deploy Grab helper → Run workflow.** The bot messages you "Grab helper is live."
+### Setup
+Already done: the Worker is deployed and the **Connect Grab helper** workflow runs on merge, sending it your chat ID, the optional `ANTHROPIC_API_KEY` and your saved places, then pointing Telegram at it.
 
-The `ANTHROPIC_API_KEY` secret from the AI summary setup lets the helper understand free-form requests. Without it, use the simple phrasings `ride to …`, `from … to …` and `food: …`.
+To add saved places, create a repository secret named `GRAB_PLACES` (a secret, because this repo is public):
+```json
+{
+  "home":    {"label": "Home", "lat": 3.1390, "lng": 101.6869},
+  "office":  {"label": "Office", "lat": 3.1100, "lng": 101.6650},
+  "airport": {"label": "KLIA Terminal 1", "lat": 2.7456, "lng": 101.7072}
+}
+```
+Get coordinates by long-pressing a spot in Google Maps. Then run **Actions → Connect Grab helper → Run workflow**. Do the same after changing `ANTHROPIC_API_KEY`.
 
-Run **Deploy Grab helper** again after changing any of these secrets.
+Without `ANTHROPIC_API_KEY`, use the simple phrasings `ride to …`, `from … to …` and `food: …`.
 
 ### Good to know
-* Only your chat (`TELEGRAM_CHAT_ID`) gets answers. Telegram signs every request to the Worker and anything unsigned is refused.
+* Only your chat (`TELEGRAM_CHAT_ID`) gets answers. Telegram signs every request to the Worker with a value derived from the bot token, and anything unsigned is refused. The Worker locks itself to your bot on first connect.
 * After the helper is deployed, the bot's incoming messages go to the Worker, so **Connect Telegram** can no longer discover chat IDs by itself. Send `/id` to the bot instead. If you want the shared channel (setup step 5), set it up before deploying the helper.
 * Places you type are looked up on OpenStreetMap, limited to Malaysia and Singapore. Always check the pins in Grab before confirming.
-* Grab does not publish its app links for personal use. If **Open in Grab** stops filling in the trip after a Grab update, the page still has **Copy destination**, and the link format can be adjusted in `grab/wrangler.toml`.
+* Grab does not publish its app links for personal use. If **Open in Grab** stops filling in the trip after a Grab update, the page still has **Copy destination**, and the link format can be adjusted in `grab/wrangler.toml` (changes to `grab/` need a redeploy to Cloudflare).
 * Advance bookings and ride types are shown in the reply; choose them in Grab.
 
 ## Using it
@@ -99,4 +95,4 @@ The first alert check only records what's already out there, so you aren't flood
 | `rules.yml` | Sources, alert rules, quiet hours, vendor list |
 | `data/state.json` | What has already been alerted (kept 30 days) |
 | `grab/` | The Grab helper (Cloudflare Worker) and its settings |
-| `.github/workflows/` | Morning brief (7:03 AM), alerts (hourly), connect (manual), Grab helper deploy |
+| `.github/workflows/` | Morning brief (7:03 AM), alerts (hourly), connect (manual), Grab helper connect |
