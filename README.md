@@ -44,6 +44,46 @@ Add a secret `ANTHROPIC_API_KEY` with a key from https://console.anthropic.com. 
 
 You keep your personal messages. The channel gets the same brief and alerts, with the greeting set by `channel_greeting` in `rules.yml`. Friends never need GitHub, and you never handle their numbers.
 
+## Grab helper
+
+Message the bot what you want and it prepares the trip in Grab. You confirm and pay in the Grab app; the bot can never book or pay on its own.
+
+* `ride to KLCC`
+* `from office to home, 6 seater, 7pm`
+* `food: nasi lemak`
+* send a location pin to get a ride there
+* `/places` lists your saved places, `/id` shows a chat ID
+
+The reply has an **Open in Grab** button with pickup and drop-off filled in. With no pickup named, Grab uses your phone's location.
+
+The morning brief and alerts run on GitHub Actions, which can't answer messages instantly. The Grab helper therefore runs as a small Cloudflare Worker (free plan is plenty), deployed from the `grab/` folder by GitHub Actions.
+
+### Setup (once)
+1. Create a free account at https://dash.cloudflare.com. Copy your **Account ID** (shown on the Workers & Pages overview page).
+2. **My Profile → API Tokens → Create Token → "Edit Cloudflare Workers" template → Create.** Copy the token.
+3. Add two repository secrets: `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`.
+4. Optional but recommended, saved places as a secret named `GRAB_PLACES` (a secret, because this repo is public):
+   ```json
+   {
+     "home":   {"label": "Home", "lat": 3.1390, "lng": 101.6869},
+     "office": {"label": "Office", "lat": 3.1100, "lng": 101.6650},
+     "airport":{"label": "KLIA Terminal 1", "lat": 2.7456, "lng": 101.7072}
+   }
+   ```
+   Get coordinates by long-pressing a spot in Google Maps.
+5. **Actions → Deploy Grab helper → Run workflow.** The bot messages you "Grab helper is live."
+
+The `ANTHROPIC_API_KEY` secret from the AI summary setup lets the helper understand free-form requests. Without it, use the simple phrasings `ride to …`, `from … to …` and `food: …`.
+
+Run **Deploy Grab helper** again after changing any of these secrets.
+
+### Good to know
+* Only your chat (`TELEGRAM_CHAT_ID`) gets answers. Telegram signs every request to the Worker and anything unsigned is refused.
+* After the helper is deployed, the bot's incoming messages go to the Worker, so **Connect Telegram** can no longer discover chat IDs by itself. Send `/id` to the bot instead. If you want the shared channel (setup step 5), set it up before deploying the helper.
+* Places you type are looked up on OpenStreetMap, limited to Malaysia and Singapore. Always check the pins in Grab before confirming.
+* Grab does not publish its app links for personal use. If **Open in Grab** stops filling in the trip after a Grab update, the page still has **Copy destination**, and the link format can be adjusted in `grab/wrangler.toml`.
+* Advance bookings and ride types are shown in the reply; choose them in Grab.
+
 ## Using it
 * **Get the brief now:** Actions → Morning brief → Run workflow
 * **Check for alerts now:** Actions → Alerts → Run workflow
@@ -58,4 +98,5 @@ The first alert check only records what's already out there, so you aren't flood
 | `bot.py` | Builds and sends the messages |
 | `rules.yml` | Sources, alert rules, quiet hours, vendor list |
 | `data/state.json` | What has already been alerted (kept 30 days) |
-| `.github/workflows/` | Morning brief (7:03 AM), alerts (hourly), connect (manual) |
+| `grab/` | The Grab helper (Cloudflare Worker) and its settings |
+| `.github/workflows/` | Morning brief (7:03 AM), alerts (hourly), connect (manual), Grab helper deploy |

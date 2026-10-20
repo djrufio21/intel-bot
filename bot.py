@@ -362,6 +362,17 @@ def run_morning(config, preview=False):
 
 # ---------- connect ----------
 
+def recent_updates():
+    """Messages Telegram is holding for the bot. Once the Grab helper is deployed,
+    Telegram delivers messages to it instead, so there is nothing to read here."""
+    hook = telegram("getWebhookInfo").get("result", {}).get("url")
+    if hook:
+        print("::notice::The Grab helper receives the bot's messages now. "
+              "Send /id to the bot in Telegram to see a chat ID.")
+        return []
+    return telegram("getUpdates").get("result", [])
+
+
 def run_connect():
     configured = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
     if configured:
@@ -377,7 +388,7 @@ def run_connect():
         # Look for channels the bot was recently added to, and tell you their ID privately
         cutoff = dt.datetime.now(dt.timezone.utc).timestamp() - 86400
         channels = {}
-        for u in telegram("getUpdates").get("result", []):
+        for u in recent_updates():
             event = u.get("my_chat_member") or u.get("channel_post") or {}
             chat = event.get("chat") or {}
             if chat.get("type") == "channel" and event.get("date", 0) >= cutoff:
@@ -390,7 +401,7 @@ def run_connect():
             print(f"Sent {len(channels)} channel ID(s) to you in Telegram.")
         return
     me = telegram("getMe")["result"]
-    updates = telegram("getUpdates").get("result", [])
+    updates = recent_updates()
     cutoff = dt.datetime.now(dt.timezone.utc).timestamp() - 3600
     chats = {}
     for u in updates:
