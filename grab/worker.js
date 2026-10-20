@@ -5,11 +5,17 @@
 // button that opens the Grab app with the trip filled in. You confirm and pay
 // inside Grab. Nothing here can book or pay on its own.
 //
-// Secrets (set by .github/workflows/grab-deploy.yml):
-//   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID   same as the rest of Intel Bot
-//   WEBHOOK_SECRET                         proves a request really came from Telegram
-//   ANTHROPIC_API_KEY                      optional; without it only simple phrasing works
-//   GRAB_PLACES                            optional JSON of saved places (kept out of the public repo)
+// The Worker never holds the bot token. It answers inside Telegram's webhook
+// request, which Telegram allows, so the token stays in GitHub.
+//
+// The "Connect Grab helper" workflow sends your settings to /setup along with the
+// bot token. The Worker checks the token with Telegram, locks itself to that bot
+// on first use, keeps only a fingerprint of the token, and stores in the CONFIG
+// KV namespace:
+//   TELEGRAM_CHAT_ID   the only chat that gets answers
+//   ANTHROPIC_API_KEY  optional; without it only simple phrasing works
+//   GRAB_PLACES        optional JSON of saved places (kept out of the public repo)
+// Telegram then calls /telegram with the same fingerprint as its secret token.
 
 const UA = "intel-bot-grab/1.0 (personal use)";
 
@@ -17,39 +23,88 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname === "/go") return goPage(url, env);
-    if (url.pathname === "/telegram" && request.method === "POST") {
-      if (request.headers.get("X-Telegram-Bot-Api-Secret-Token") !== env.WEBHOOK_SECRET) {
+    if (request.method === "POST" && url.pathname === "/setup") return setup(request, env);
+    if (request.method === "POST" && url.pathname === "/telegram") {
+      const config = (await env.CONFIG.get("config", "json")) || {};
+      const given = request.headers.get("X-Telegram-Bot-Api-Secret-Token") || "";
+      if (!config.webhook_secret || !(await sameText(given, config.webhook_secret))) {
         return new Response("forbidden", { status: 403 });
       }
       const update = await request.json();
-      // Reply after acknowledging, so Telegram never retries a slow request.
-      ctx.waitUntil(handleUpdate(update, env, url.origin).catch((err) => console.error(err)));
-      return new Response("ok");
+      const cfg = { ...env, ...config };
+      let answer = null;
+      try {
+        answer = await handleUpdate(update, cfg, url.origin);
+      } catch (err) {
+        console.error(err);
+      }
+      // The reply travels back in this response, so no bot token is needed here.
+      return answer ? Response.json(answer) : new Response("ok");
     }
     return new Response("Intel Bot Grab helper is running.");
   },
 };
 
-// ---------- Telegram ----------
+// ---------- Setup ----------
 
-async function tg(env, method, params) {
-  const resp = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(params),
-  });
-  if (!resp.ok) console.error(method, resp.status, await resp.text());
-  return resp;
+async function sha256(text) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+async function sameText(a, b) {
+  // Compare fingerprints of both values so timing reveals nothing about the secret.
+  return (await sha256("cmp:" + a)) === (await sha256("cmp:" + b));
+}
+
+// The webhook secret Telegram sends with every message. The workflow derives the
+// same value from the bot token, so the token itself is never stored here.
+const webhookSecret = (token) => sha256(token + "-grab-webhook").then((h) => h.slice(0, 48));
+
+async function setup(request, env) {
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json({ ok: false, error: "Expected JSON" }, { status: 400 });
+  }
+  const token = String(body.TELEGRAM_BOT_TOKEN || "").trim();
+  const me = token
+    ? await fetch(`https://api.telegram.org/bot${token}/getMe`).then((r) => r.json()).catch(() => null)
+    : null;
+  if (!me?.ok) return Response.json({ ok: false, error: "Telegram did not accept the bot token" }, { status: 403 });
+
+  const old = (await env.CONFIG.get("config", "json")) || {};
+  if (old.bot_id && old.bot_id !== me.result.id) {
+    return Response.json({ ok: false, error: "This helper is locked to a different bot" }, { status: 403 });
+  }
+  const config = { bot_id: me.result.id, webhook_secret: await webhookSecret(token) };
+  for (const k of ["TELEGRAM_CHAT_ID", "ANTHROPIC_API_KEY", "GRAB_PLACES"]) {
+    if (body[k]) config[k] = String(body[k]).trim();
+  }
+  if (config.GRAB_PLACES) {
+    try {
+      JSON.parse(config.GRAB_PLACES);
+    } catch {
+      return Response.json({ ok: false, error: "GRAB_PLACES is not valid JSON" }, { status: 400 });
+    }
+  }
+  await env.CONFIG.put("config", JSON.stringify(config));
+  const stored = Object.keys(config).filter((k) => k === k.toUpperCase());
+  return Response.json({ ok: true, bot: me.result.username, stored });
+}
+
+// ---------- Telegram ----------
+
 function reply(env, chatId, text, buttons) {
-  return tg(env, "sendMessage", {
+  return {
+    method: "sendMessage",
     chat_id: chatId,
     text,
     parse_mode: "HTML",
     disable_web_page_preview: true,
     ...(buttons ? { reply_markup: { inline_keyboard: buttons } } : {}),
-  });
+  };
 }
 
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -68,12 +123,12 @@ const HELP = [
 
 async function handleUpdate(update, env, origin) {
   const msg = update.message || update.edited_message;
-  if (!msg) return;
+  if (!msg) return null;
   const chatId = msg.chat.id;
   // Only answer you. Anyone else who finds the bot gets nothing.
   if (String(chatId) !== String(env.TELEGRAM_CHAT_ID).trim()) {
-    if ((msg.text || "").trim() === "/id") await reply(env, chatId, `Chat ID: <code>${chatId}</code>`);
-    return;
+    if ((msg.text || "").trim() === "/id") return reply(env, chatId, `Chat ID: <code>${chatId}</code>`);
+    return null;
   }
 
   const places = savedPlaces(env);
@@ -86,17 +141,16 @@ async function handleUpdate(update, env, origin) {
   }
 
   const text = (msg.text || "").trim();
-  if (!text) return;
+  if (!text) return null;
   if (text === "/start" || text === "/help") return reply(env, chatId, HELP);
   if (text === "/id") return reply(env, chatId, `Chat ID: <code>${chatId}</code>`);
   if (text === "/places") {
     const names = Object.keys(places);
     return reply(env, chatId, names.length
       ? "<b>Saved places</b>\n" + names.map((n) => `• ${esc(n)}: ${esc(places[n].label)}`).join("\n")
-      : "No saved places yet. Add the GRAB_PLACES secret (see the README).");
+      : "No saved places yet. Add the GRAB_PLACES secret in GitHub, then run Connect Grab helper.");
   }
 
-  await tg(env, "sendChatAction", { chat_id: chatId, action: "typing" });
   let request;
   try {
     request = env.ANTHROPIC_API_KEY ? await understandWithAI(env, text, places) : understandSimply(text);
