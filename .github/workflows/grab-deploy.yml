@@ -1,0 +1,82 @@
+name: Deploy Grab helper
+
+on:
+  push:
+    branches: [main]
+    paths: ["grab/**", ".github/workflows/grab-deploy.yml"]
+  workflow_dispatch: # run by hand after adding or changing secrets
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GRAB_PLACES: ${{ secrets.GRAB_PLACES }}
+    steps:
+      - name: Check setup
+        run: |
+          missing=""
+          for s in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID TELEGRAM_BOT_TOKEN TELEGRAM_CHAT_ID; do
+            [ -z "${!s}" ] && missing="$missing $s"
+          done
+          if [ -n "$missing" ]; then
+            echo "::notice::Grab helper not deployed yet. Missing secrets:$missing. See the README, section 'Grab helper'."
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
+
+      - uses: actions/checkout@v5
+        if: env.SKIP != '1'
+      - uses: actions/setup-node@v5
+        if: env.SKIP != '1'
+        with:
+          node-version: "22"
+
+      - name: Deploy the Worker
+        if: env.SKIP != '1'
+        working-directory: grab
+        run: |
+          npx --yes wrangler@4 deploy | tee deploy.log
+          url=$(grep -oE 'https://[a-zA-Z0-9.-]+\.workers\.dev' deploy.log | head -1)
+          [ -z "$url" ] && { echo "::error::Could not read the Worker address from the deploy output."; exit 1; }
+          echo "WORKER_URL=$url" >> "$GITHUB_ENV"
+
+      - name: Store secrets in the Worker
+        if: env.SKIP != '1'
+        working-directory: grab
+        run: |
+          secret=$(printf '%s' "$TELEGRAM_BOT_TOKEN-grab-webhook" | sha256sum | cut -c1-48)
+          echo "::add-mask::$secret"
+          echo "WEBHOOK_SECRET=$secret" >> "$GITHUB_ENV"
+          WEBHOOK_SECRET="$secret" python3 - > "$RUNNER_TEMP/secrets.json" <<'PY'
+          import json, os
+          out = {k: os.environ[k] for k in ("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "WEBHOOK_SECRET")}
+          out["GRAB_PLACES"] = os.environ.get("GRAB_PLACES") or "{}"
+          json.loads(out["GRAB_PLACES"])  # stop here if the saved places are not valid JSON
+          if os.environ.get("ANTHROPIC_API_KEY"):
+              out["ANTHROPIC_API_KEY"] = os.environ["ANTHROPIC_API_KEY"]
+          print(json.dumps(out))
+          PY
+          npx --yes wrangler@4 secret bulk "$RUNNER_TEMP/secrets.json"
+          rm "$RUNNER_TEMP/secrets.json"
+
+      - name: Point Telegram at the Worker
+        if: env.SKIP != '1'
+        run: |
+          api="https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN"
+          curl -fsS "$api/setWebhook" -H 'Content-Type: application/json' -d "{
+            \"url\": \"$WORKER_URL/telegram\",
+            \"secret_token\": \"$WEBHOOK_SECRET\",
+            \"allowed_updates\": [\"message\", \"edited_message\"],
+            \"drop_pending_updates\": true }" > /dev/null
+          curl -fsS "$api/setMyCommands" -H 'Content-Type: application/json' -d '{"commands": [
+            {"command": "help", "description": "How to ask for a ride or food"},
+            {"command": "places", "description": "Your saved places"},
+            {"command": "id", "description": "Show this chat ID"}]}' > /dev/null
+          curl -fsS "$api/sendMessage" -H 'Content-Type: application/json' \
+            -d "{\"chat_id\": \"$TELEGRAM_CHAT_ID\", \"text\": \"Grab helper is live. Try: ride to KLCC\"}" > /dev/null
+          echo "Grab helper live at $WORKER_URL"

@@ -1,0 +1,16 @@
+# Cloudflare Worker that answers your Grab requests in Telegram.
+# Deployed by .github/workflows/grab-deploy.yml. Secrets are set there, never here.
+
+name = "intel-bot-grab"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+AI_MODEL = "claude-haiku-5-5"
+
+# How the "Open in Grab" button opens the app. {placeholders} are filled in and
+# any parameter left empty is dropped. Grab does not publish these formats for
+# personal use, so if a link stops prefilling after a Grab update, adjust here.
+GRAB_RIDE_LINK = "grab://open?screenType=BOOKING&pickUpLatitude={plat}&pickUpLongitude={plng}&pickUpAddress={paddr}&dropOffLatitude={dlat}&dropOffLongitude={dlng}&dropOffAddress={daddr}"
+GRAB_FOOD_LINK = "grab://open?screenType=GRABFOOD&searchParameter={q}"
