@@ -1,25 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPT1NuanA1WjExdGp6OVNMUGdxNnQxUkUzU2l3eTI3YUE1QXQxaDQwOVgtbUtpRGRtdmRxakNxU0pOZm1ZRTBZQ0EzOEVfV3dyaE5TdnhnNzJSM3JkUTZzN01ROUdTbWxNbGd5alVla2xKZC16cXQ4a2FYMTdqa2VKbzlldzFfdVRwT1NDbV9KX0hEUS1mc0NCbUY4Yw?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPT1NuanA1WjExdGp6OVNMUGdxNnQxUkUzU2l3eTI3YUE1QXQxaDQwOVgtbUtpRGRtdmRxakNxU0pOZm1ZRTBZQ0EzOEVfV3dyaE5TdnhnNzJSM3JkUTZzN01ROUdTbWxNbGd5alVla2xKZC16cXQ4a2FYMTdqa2VKbzlldzFfdVRwT1NDbV9KX0hEUS1mc0NCbUY4Yw?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "Moneyweb",
-   "title": "AI tool that hacked Korean Banks was used in Japan, GMO says"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5Rb3FBUWVrVEVCZUhFMVFhbVhsRTZEbDZWdm9xUnBGSG50eE9YQVN1b2h3TW81dVMwREJKUG5HVGl5dUI1WXZ2WHdXNWM2TWl4bjk0MXg1YTlmQnRDakhyS000YU5BLVowS2Vn0gFrQVVfeXFMTlFvcUFRZWtURUJlSEUxUWFtWGxFNkRsNlZ2b3FScEZIbnR4T1hBU3VvaHdNbzV1UzBEQkpQbkdUaXl1QjVZdnZYd1c1YzZNaXhuOTQxeDVhOWZCdENqSHJLTTRhTkEtWjBLZWc?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5Rb3FBUWVrVEVCZUhFMVFhbVhsRTZEbDZWdm9xUnBGSG50eE9YQVN1b2h3TW81dVMwREJKUG5HVGl5dUI1WXZ2WHdXNWM2TWl4bjk0MXg1YTlmQnRDakhyS000YU5BLVowS2Vn0gFrQVVfeXFMTlFvcUFRZWtURUJlSEUxUWFtWGxFNkRsNlZ2b3FScEZIbnR4T1hBU3VvaHdNbzV1UzBEQkpQbkdUaXl1QjVZdnZYd1c1YzZNaXhuOTQxeDVhOWZCdENqSHJLTTRhTkEtWjBLZWc?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "Cyber Press",
-   "title": "Hackers Claim State Bank of India Data Leak Exposing 375,000 Records and 2,722 Documents"
-  }
- ],
- "last_morning": "2026-10-20",
+ "held": [],
+ "last_morning": "2026-10-21",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2025-61624": "2026-10-16T22:11:26+00:00",
