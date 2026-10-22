@@ -1,34 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5Qa3JtZVBRejB4NGRCbjNWODJLVWtpeFJSQWIwcEJJb2lUQWZLVFNKSmZGM0VoR2VEeEtpcUx0MG5ieEFUMHF6d1BhWTFrTkYyUjdmVkRCQVpURjFra25VT2wxZU9FQlZnZHJKdzV3ejZjTkVSNEEyZ0xIdGdEQQ?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5Qa3JtZVBRejB4NGRCbjNWODJLVWtpeFJSQWIwcEJJb2lUQWZLVFNKSmZGM0VoR2VEeEtpcUx0MG5ieEFUMHF6d1BhWTFrTkYyUjdmVkRCQVpURjFra25VT2wxZU9FQlZnZHJKdzV3ejZjTkVSNEEyZ0xIdGdEQQ?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "Insurance Journal",
-   "title": "Cyberattack Hits India\u2019s Largest Bank, Exposes Customer Data"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNZjJhZ0o4NEk0S181RDgwczZzMjZpYnhlQmlEZHFZNHJGR0djWGNELVdQZTYtYU9BSV9hc3llUEtnSl9QZm9PYVBmbUl6dHlIWVhFTzczZFdJcjBCRldkU3BwUmJXekc1cGJEbE41WGw2ZHR0M1hSQWY0MDNHMDJ2OWZXS0sxbzF5eUNZSDZNN0d1aGw3aVhCWW91eU53cGdoemhRNnR1bnNCUDV0SW5CbEtOYmRneHBreV9WRlhVRjVJYVdCVVRxd2RMUWYzQUVObnc?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNZjJhZ0o4NEk0S181RDgwczZzMjZpYnhlQmlEZHFZNHJGR0djWGNELVdQZTYtYU9BSV9hc3llUEtnSl9QZm9PYVBmbUl6dHlIWVhFTzczZFdJcjBCRldkU3BwUmJXekc1cGJEbE41WGw2ZHR0M1hSQWY0MDNHMDJ2OWZXS0sxbzF5eUNZSDZNN0d1aGw3aVhCWW91eU53cGdoemhRNnR1bnNCUDV0SW5CbEtOYmRneHBreV9WRlhVRjVJYVdCVVRxd2RMUWYzQUVObnc?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "TechRadar",
-   "title": "State Bank of India reports cyberattack \u2014 thousands of customer records affected, here's what we know"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbDJScjJndzF1U25pazI2QmFUVmlhdV81VUJSN014VnAta1JYUVdIRkZ4YThJSFNUN3k2OGxGU0FXMHlkd0t6UjItWkhlY2hBMzlab1Q3bHlhTktjWk1aZk1rTjFNUU04SUV4X0RTMy1QdF9XVVoxNWxFQVBuLW9DLVdNQUxXanA5SHo2ZEZ2RGhzeHZQcmlSYnl0YWpjOVkzUHc?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbDJScjJndzF1U25pazI2QmFUVmlhdV81VUJSN014VnAta1JYUVdIRkZ4YThJSFNUN3k2OGxGU0FXMHlkd0t6UjItWkhlY2hBMzlab1Q3bHlhTktjWk1aZk1rTjFNUU04SUV4X0RTMy1QdF9XVVoxNWxFQVBuLW9DLVdNQUxXanA5SHo2ZEZ2RGhzeHZQcmlSYnl0YWpjOVkzUHc?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "Vietnam.vn",
-   "title": "India's largest bank was hit by a cyberattack, leaking nearly 4,000 customer records."
-  }
- ],
- "last_morning": "2026-10-21",
+ "held": [],
+ "last_morning": "2026-10-22",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2025-61624": "2026-10-16T22:11:26+00:00",
