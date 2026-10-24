@@ -1,25 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOdGd1TG9tTWZEb2NSSmtQZWZ6MlM4TkdxeUNseHE5TWgyTk55RGtEVGtrMzltNlVxWlFDYVZRNmJoRXRSRTJuOHVMdVlJTTEwZkpfV3RBZFNfQ2ZlZkRrSkd1cmk4Z3JGcElnelhCRnNjNThCalktU0N5RmduZ1ZTSXk5UkpFMEVnamxuWU4tX19YSGRtRDdESTZQU2R6MHQwNFdlOGE3aDd1NXJHbm54bXN5ZHkxdw?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOdGd1TG9tTWZEb2NSSmtQZWZ6MlM4TkdxeUNseHE5TWgyTk55RGtEVGtrMzltNlVxWlFDYVZRNmJoRXRSRTJuOHVMdVlJTTEwZkpfV3RBZFNfQ2ZlZkRrSkd1cmk4Z3JGcElnelhCRnNjNThCalktU0N5RmduZ1ZTSXk5UkpFMEVnamxuWU4tX19YSGRtRDdESTZQU2R6MHQwNFdlOGE3aDd1NXJHbm54bXN5ZHkxdw?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "Nikkei Asia",
-   "title": "Japan car-sharing operator to offer users $19 each after data breach"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOUnA5UHV3SXJkaWItQ0VxRTVMSkZzWlRCRUNJSjI2Y2l4anZaNVFqOTM2aWRXMEQ4bVh5a21rRk13cko0Z094LTE5c2xjdkRkLVZiTDczQTI1LUs0cVhRRVF1TVI2SXFKbldDZEJoWjQycGZzZFMteDk0eFhGU0drWlRRMmhWb1h1Q3BEX1pTUklaeDJ3YzdOZ0pn?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOUnA5UHV3SXJkaWItQ0VxRTVMSkZzWlRCRUNJSjI2Y2l4anZaNVFqOTM2aWRXMEQ4bVh5a21rRk13cko0Z094LTE5c2xjdkRkLVZiTDczQTI1LUs0cVhRRVF1TVI2SXFKbldDZEJoWjQycGZzZFMteDk0eFhGU0drWlRRMmhWb1h1Q3BEX1pTUklaeDJ3YzdOZ0pn?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "www.daily-sun.com",
-   "title": "Cyberattack hits India\u2019s top lender State Bank of India"
-  }
- ],
- "last_morning": "2026-10-23",
+ "held": [],
+ "last_morning": "2026-10-24",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2025-61624": "2026-10-16T22:11:26+00:00",
