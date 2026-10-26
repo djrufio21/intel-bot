@@ -1,16 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNMV9aZlVrNnBYb2xCVFBvWWVDcXgzd09oVFRMRDVpdld3TlAwZURMSmpJbngwX2pMLWg1OTA4bHBjVVZCcTRkN0lZUllONVF1Q2kyQUtKM0pfTjY1ZFN5SWlfX1o0Wk5ISG8tODZhc000TWdGWDV1TDdGMmVoclJMc1RoUTd4RzjSAYcBQVVfeXFMTTFfWmZVazZwWG9sQlRQb1llQ3F4M3dPaFRUTEQ1aXZXd05QMGVETEpqSW54MF9qTC1oNTkwOGxwY1VWQnE0ZDdJWVJZTjVRdUNpMkFLSjNKX042NWRTeUlpX19aNFpOSEhvLTg2YXNNNE1nRlg1dUw3RjJlaHJSTHNUaFE3eEc4?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNMV9aZlVrNnBYb2xCVFBvWWVDcXgzd09oVFRMRDVpdld3TlAwZURMSmpJbngwX2pMLWg1OTA4bHBjVVZCcTRkN0lZUllONVF1Q2kyQUtKM0pfTjY1ZFN5SWlfX1o0Wk5ISG8tODZhc000TWdGWDV1TDdGMmVoclJMc1RoUTd4RzjSAYcBQVVfeXFMTTFfWmZVazZwWG9sQlRQb1llQ3F4M3dPaFRUTEQ1aXZXd05QMGVETEpqSW54MF9qTC1oNTkwOGxwY1VWQnE0ZDdJWVJZTjVRdUNpMkFLSjNKX042NWRTeUlpX19aNFpOSEhvLTg2YXNNNE1nRlg1dUw3RjJlaHJSTHNUaFE3eEc4?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "The Probe",
-   "title": "Central Bank of India Fraud: Was the RBI\u2019s Payment Backbone Breached?"
-  }
- ],
- "last_morning": "2026-10-25",
+ "held": [],
+ "last_morning": "2026-10-26",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2025-61624": "2026-10-16T22:11:26+00:00",
