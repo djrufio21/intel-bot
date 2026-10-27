@@ -1,5 +1,42 @@
 {
- "held": [],
+ "held": [
+  {
+   "detail": "Apple patched 286 vulnerabilities in iOS and macOS 27.2 and brought the fix for an exploited CoreGraphics zero-day to older iPhones. The post iOS, macOS 27.2 Patch 286 Bugs; Fix for Exploited Flaw Backported to iOS 18 appeared first on\u2026",
+   "icon": "\ud83d\udfe0",
+   "id": "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/",
+   "link": "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/",
+   "rule": "Zero-day in a major vendor",
+   "source": "SecurityWeek",
+   "title": "iOS, macOS 27.2 Patch 286 Bugs; Fix for Exploited Flaw Backported to iOS 18"
+  },
+  {
+   "detail": "\u200bApple has backported security patches released last month to older iPhones and iPads, addressing a zero-day bug exploited in \"extremely sophisticated\" targeted attacks on iOS devices. [...]",
+   "icon": "\ud83d\udfe0",
+   "id": "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/",
+   "link": "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/",
+   "rule": "Zero-day in a major vendor",
+   "source": "BleepingComputer",
+   "title": "Apple backports CoreGraphics zero-day patches to older iPhones"
+  },
+  {
+   "detail": "Keep your patch management pipelines primed in case another round of Citrix NetScaler patches get released soon. The post This is Fine: What NetScaler Zero-Days Tell Us About the New Normal appeared first on SecurityWeek .",
+   "icon": "\ud83d\udfe0",
+   "id": "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/",
+   "link": "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/",
+   "rule": "Zero-day in a major vendor",
+   "source": "SecurityWeek",
+   "title": "This is Fine: What NetScaler Zero-Days Tell Us About the New Normal"
+  },
+  {
+   "detail": "",
+   "icon": "\ud83d\udfe0",
+   "id": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1rclFRYzlWRHUtX2RGMWNkS2puNm5veTEwMXZNN09fTTladzRkMi0zOGwwSkRiZktjeVg0LVM2eDdWVTNrMWZ5Sy1BZkhHbVFaeGxoRXB4cnVyTUJ5VUE?oc=5",
+   "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1rclFRYzlWRHUtX2RGMWNkS2puNm5veTEwMXZNN09fTTladzRkMi0zOGwwSkRiZktjeVg0LVM2eDdWVTNrMWZ5Sy1BZkhHbVFaeGxoRXB4cnVyTUJ5VUE?oc=5",
+   "rule": "Attack on an APAC telco or bank",
+   "source": "\u0987\u09a8\u09cd\u09b8\u09cd\u09af\u09c1\u09b0\u09c7\u09a8\u09cd\u09b8 \u09a8\u09bf\u0989\u099c \u09ac\u09bf\u09a1\u09bf",
+   "title": "Data breach affects customers of six insurers in Singapore"
+  }
+ ],
  "last_morning": "2026-10-27",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
@@ -12,6 +49,7 @@
   "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5fakdPbUVSMFlnQ1lHSjNxSE90a2dCWklYcGRwb1A5d1FsaEZGa1dDUHlidzVoUkZqU3l4RE9GcnhVb1kteEVGa0REUkthNHotakl5RlI5bw?oc=5": "2026-10-22T18:46:58+00:00",
   "https://news.google.com/rss/articles/CBMiVEFVX3lxTFA4Z0pzWndYUDE4WnJFakJFdndmMlJBQlFFRmtWclRDbkF5SjdSTDVLUkFscG9EcnN4VzM5cWNsRzNHRi0ybGNaS3FzQ2ZQZzJaNmpneA?oc=5": "2026-10-24T14:51:38+00:00",
   "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5oTmVZUVJwZkp3WWl4d1JpS01tWWhFbnZabUJTOUhDdHFBMnBoYV9iSEt1Tkxra2g1aUFUOGpaci1LQWNXXzRGRjlvZ1BGM3BxYk1hVENndzdhWXPSAVdBVV95cUxNQ29NZXdtWjNCNTZ1UWxsWWhfMnBpRDVGdWl0WGM0VVM5TDJEX2dzNzVqTHZwRjdlc3d3WHFpRTJOQW1vaGN2OGZlMDFpdWlTcER6dVZ0QWM?oc=5": "2026-10-24T06:26:21+00:00",
+  "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1rclFRYzlWRHUtX2RGMWNkS2puNm5veTEwMXZNN09fTTladzRkMi0zOGwwSkRiZktjeVg0LVM2eDdWVTNrMWZ5Sy1BZkhHbVFaeGxoRXB4cnVyTUJ5VUE?oc=5": "2026-10-27T16:50:55+00:00",
   "https://news.google.com/rss/articles/CBMia0FVX3lxTE5Rb3FBUWVrVEVCZUhFMVFhbVhsRTZEbDZWdm9xUnBGSG50eE9YQVN1b2h3TW81dVMwREJKUG5HVGl5dUI1WXZ2WHdXNWM2TWl4bjk0MXg1YTlmQnRDakhyS000YU5BLVowS2Vn0gFrQVVfeXFMTlFvcUFRZWtURUJlSEUxUWFtWGxFNkRsNlZ2b3FScEZIbnR4T1hBU3VvaHdNbzV1UzBEQkpQbkdUaXl1QjVZdnZYd1c1YzZNaXhuOTQxeDVhOWZCdENqSHJLTTRhTkEtWjBLZWc?oc=5": "2026-10-20T17:30:45+00:00",
   "https://news.google.com/rss/articles/CBMidkFVX3lxTE1idG52Z2ZDMkQ1SkFKaEhVUlNaaGdYamJ1N1ZxMGdOYkhkNkg5b0h6RWNhZy1iR29CRi1ER3hVUHc2WFI0OVE3Xzh5QmZzR2hSVDNZNDJQdEhzZ3lEY1pMZlBYY0xROXI0V1EwMUtHaDJaS2hOa3c?oc=5": "2026-10-16T10:35:53+00:00",
   "https://news.google.com/rss/articles/CBMidkFVX3lxTE5MQ2pubHZSS1hVVGZUN0VEeGNNWHR4M3B2UTA4ZmVEVlJnRC1vejRkbkdRbjVIczBGUFcyWm9zcGlxY3kyVDVyQkJUWHlVVS11Y0ZzY2NCVjFEOGJwSzRaaGRQalFJcnZOcDJWMHNGOWtMQy1remc?oc=5": "2026-10-24T23:41:00+00:00",
@@ -35,7 +73,10 @@
   "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNb2JQY2lwWWRxeWlFV2p0cHlWU2dPNG9Hc1BNS3JSUVM5cThQX2l6ZURpaXVXQ2tqNHdoNzlKU2lnN19jMUFtTDdwN2F6eUdkTnJsWEdvdk1fVjhZTUtpWlduNDNtR0V0b3E1bktjV251cHJyMHJlM1FQdUc1cjFvUDVsbmtRQVBRaVU4R25jbHdmcHRrMEFWbEFYT3RndXVXVUJZYlNjZnUyYVZQLW9PMXpiOUV6Vk9G?oc=5": "2026-10-22T07:56:27+00:00",
   "https://news.google.com/rss/articles/CBMixwFBVV95cUxPTXViRGxCSjd1aXlfbTFadGdkbVcwSUZBTDVrdGw1ZXZZLUxyYm5oYk80bjd6SUgzc3ZkRW1YUUQ4ZWxkUHMxR3FmSXlrN3ExMWczdEMzclRCbU5uX2F2R1Fjc1BhU0JQZUpDcnVFU3lrZHFtdkZPeWVSRXZsbFNQRElHTHRzbjBzUExKNVpQbVZNUXIzMkFEQ2N3SmdFT2ljRERUZ0tEVUdaTEdEbVg5TjlhYm5OY1dMc1N6RzN3LTdNOVRUU3N3?oc=5": "2026-10-21T10:34:07+00:00",
   "https://thehackernews.com/2026/10/state-bank-of-india-confirms-data-leak.html": "2026-10-21T10:34:07+00:00",
+  "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/": "2026-10-27T16:50:55+00:00",
   "https://www.darkreading.com/cyberattacks-data-breaches/state-bank-india-customer-pii-data-leak": "2026-10-23T07:55:29+00:00",
-  "https://www.darkreading.com/endpoint-security/beyondtrust-remote-support-exploited-edge-bugs": "2026-10-16T22:11:26+00:00"
+  "https://www.darkreading.com/endpoint-security/beyondtrust-remote-support-exploited-edge-bugs": "2026-10-16T22:11:26+00:00",
+  "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/": "2026-10-27T16:50:55+00:00",
+  "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/": "2026-10-27T16:50:55+00:00"
  }
 }
