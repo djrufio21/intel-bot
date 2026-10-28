@@ -1,52 +1,6 @@
 {
- "held": [
-  {
-   "detail": "Apple patched 286 vulnerabilities in iOS and macOS 27.2 and brought the fix for an exploited CoreGraphics zero-day to older iPhones. The post iOS, macOS 27.2 Patch 286 Bugs; Fix for Exploited Flaw Backported to iOS 18 appeared first on\u2026",
-   "icon": "\ud83d\udfe0",
-   "id": "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/",
-   "link": "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/",
-   "rule": "Zero-day in a major vendor",
-   "source": "SecurityWeek",
-   "title": "iOS, macOS 27.2 Patch 286 Bugs; Fix for Exploited Flaw Backported to iOS 18"
-  },
-  {
-   "detail": "\u200bApple has backported security patches released last month to older iPhones and iPads, addressing a zero-day bug exploited in \"extremely sophisticated\" targeted attacks on iOS devices. [...]",
-   "icon": "\ud83d\udfe0",
-   "id": "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/",
-   "link": "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/",
-   "rule": "Zero-day in a major vendor",
-   "source": "BleepingComputer",
-   "title": "Apple backports CoreGraphics zero-day patches to older iPhones"
-  },
-  {
-   "detail": "Keep your patch management pipelines primed in case another round of Citrix NetScaler patches get released soon. The post This is Fine: What NetScaler Zero-Days Tell Us About the New Normal appeared first on SecurityWeek .",
-   "icon": "\ud83d\udfe0",
-   "id": "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/",
-   "link": "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/",
-   "rule": "Zero-day in a major vendor",
-   "source": "SecurityWeek",
-   "title": "This is Fine: What NetScaler Zero-Days Tell Us About the New Normal"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1rclFRYzlWRHUtX2RGMWNkS2puNm5veTEwMXZNN09fTTladzRkMi0zOGwwSkRiZktjeVg0LVM2eDdWVTNrMWZ5Sy1BZkhHbVFaeGxoRXB4cnVyTUJ5VUE?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1rclFRYzlWRHUtX2RGMWNkS2puNm5veTEwMXZNN09fTTladzRkMi0zOGwwSkRiZktjeVg0LVM2eDdWVTNrMWZ5Sy1BZkhHbVFaeGxoRXB4cnVyTUJ5VUE?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "\u0987\u09a8\u09cd\u09b8\u09cd\u09af\u09c1\u09b0\u09c7\u09a8\u09cd\u09b8 \u09a8\u09bf\u0989\u099c \u09ac\u09bf\u09a1\u09bf",
-   "title": "Data breach affects customers of six insurers in Singapore"
-  },
-  {
-   "detail": "Apple on Monday backported fixes for a high-severity security flaw that was exploited in real-world cyber attacks to older devices. The vulnerability, tracked as CVE-2026-86950 (CVSS score: 8.8), is an out-of-bounds write affecting\u2026",
-   "icon": "\ud83d\udfe0",
-   "id": "https://thehackernews.com/2026/10/apple-backports-fix-for-exploited.html",
-   "link": "https://thehackernews.com/2026/10/apple-backports-fix-for-exploited.html",
-   "rule": "Zero-day in a major vendor",
-   "source": "The Hacker News",
-   "title": "Apple Backports Fix for Exploited CoreGraphics Flaw to Older iPhones and iPads"
-  }
- ],
- "last_morning": "2026-10-27",
+ "held": [],
+ "last_morning": "2026-10-28",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2025-61624": "2026-10-16T22:11:26+00:00",
