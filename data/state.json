@@ -1,5 +1,33 @@
 {
- "held": [],
+ "held": [
+  {
+   "detail": "Cisco released security updates to patch a denial-of-service zero-day in Adaptive Security Appliance (ASA) and Threat Defense (FTD) software that attackers are exploiting to remotely crash vulnerable firewall devices. [...]",
+   "icon": "\ud83d\udfe0",
+   "id": "https://www.bleepingcomputer.com/news/security/cisco-warns-of-firewall-zero-day-exploited-to-crash-ssl-vpn-devices/",
+   "link": "https://www.bleepingcomputer.com/news/security/cisco-warns-of-firewall-zero-day-exploited-to-crash-ssl-vpn-devices/",
+   "rule": "Zero-day in a major vendor",
+   "source": "BleepingComputer",
+   "title": "New Cisco firewall zero-day exploited to crash SSL VPN devices"
+  },
+  {
+   "detail": "Cisco Talos linked SD-WAN key-stealing malware to infrastructure overlapping Volt Typhoon\u2019s Silent Train network, which Lumen detailed. The post Cisco SD-WAN Zero-Day Exploitation Tied to Volt Typhoon\u2019s \u2018Silent Train\u2019 Network appeared\u2026",
+   "icon": "\ud83d\udfe0",
+   "id": "https://www.securityweek.com/cisco-sd-wan-zero-day-exploitation-tied-to-volt-typhoons-silent-train-network/",
+   "link": "https://www.securityweek.com/cisco-sd-wan-zero-day-exploitation-tied-to-volt-typhoons-silent-train-network/",
+   "rule": "Zero-day in a major vendor",
+   "source": "SecurityWeek",
+   "title": "Cisco SD-WAN Zero-Day Exploitation Tied to Volt Typhoon\u2019s \u2018Silent Train\u2019 Network"
+  },
+  {
+   "detail": "The data of So-net and Plala customers in Japan was exposed, along with 54,401 email account passwords and 16 bank account records. The post Hackers Steal 2.6 Million Records From Sony\u2019s Japanese ISP So-net appeared first on SecurityWeek .",
+   "icon": "\ud83d\udfe0",
+   "id": "https://www.securityweek.com/hackers-steal-2-6-million-records-from-sonys-japanese-isp-so-net/",
+   "link": "https://www.securityweek.com/hackers-steal-2-6-million-records-from-sonys-japanese-isp-so-net/",
+   "rule": "Attack on an APAC telco or bank",
+   "source": "SecurityWeek",
+   "title": "Hackers Steal 2.6 Million Records From Sony\u2019s Japanese ISP So-net"
+  }
+ ],
  "last_morning": "2026-10-29",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
@@ -45,8 +73,11 @@
   "https://thehackernews.com/2026/10/shinyhunters-exploited-oracle.html": "2026-10-28T14:29:08+00:00",
   "https://thehackernews.com/2026/10/state-bank-of-india-confirms-data-leak.html": "2026-10-21T10:34:07+00:00",
   "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/": "2026-10-27T16:50:55+00:00",
+  "https://www.bleepingcomputer.com/news/security/cisco-warns-of-firewall-zero-day-exploited-to-crash-ssl-vpn-devices/": "2026-10-29T19:50:08+00:00",
   "https://www.darkreading.com/cyberattacks-data-breaches/state-bank-india-customer-pii-data-leak": "2026-10-23T07:55:29+00:00",
   "https://www.darkreading.com/endpoint-security/beyondtrust-remote-support-exploited-edge-bugs": "2026-10-16T22:11:26+00:00",
+  "https://www.securityweek.com/cisco-sd-wan-zero-day-exploitation-tied-to-volt-typhoons-silent-train-network/": "2026-10-29T19:50:08+00:00",
+  "https://www.securityweek.com/hackers-steal-2-6-million-records-from-sonys-japanese-isp-so-net/": "2026-10-29T19:50:08+00:00",
   "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/": "2026-10-27T16:50:55+00:00",
   "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/": "2026-10-27T16:50:55+00:00"
  }
