@@ -1,25 +1,6 @@
 {
- "held": [
-  {
-   "detail": "Binance, the world's largest cryptocurrency exchange, confirmed that it had been hacked in a $6.3 billion heist that blockchain investigators are blaming on North Korea.",
-   "icon": "\ud83d\udfe0",
-   "id": "https://therecord.media/binance-hit-by-record-6-billion-crypto-hack",
-   "link": "https://therecord.media/binance-hit-by-record-6-billion-crypto-hack",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "The Record",
-   "title": "Binance hit by record $6.3 billion crypto hack, scrambles to freeze funds"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBjVko3OWZIZ0EzTzZGX3dHNXdKdmx1VzZ3S0sybVUtM2lSY0FzWUVaSzNFWmpreWZSNlhJSTJJU2Y2QlNQVGhydUxnUkplOTRQeWpBLTN3RVR5ZzZuUmRDRElqNXNIUk1mSEtfYnRDcDZfUkE?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBjVko3OWZIZ0EzTzZGX3dHNXdKdmx1VzZ3S0sybVUtM2lSY0FzWUVaSzNFWmpreWZSNlhJSTJJU2Y2QlNQVGhydUxnUkplOTRQeWpBLTN3RVR5ZzZuUmRDRElqNXNIUk1mSEtfYnRDcDZfUkE?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "\u6bce\u65e5\u65b0\u805e",
-   "title": "Japan gov't asked telecom firms to block extortion site in GMO data breach"
-  }
- ],
- "last_morning": "2026-10-30",
+ "held": [],
+ "last_morning": "2026-10-31",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2025-61624": "2026-10-16T22:11:26+00:00",
