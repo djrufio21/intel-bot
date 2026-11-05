@@ -1,5 +1,42 @@
 {
- "held": [],
+ "held": [
+  {
+   "detail": "Tracked as CVE-2026-107441, the out-of-bounds write flaw could allow attackers to execute OS commands via crafted HTTP requests. The post Zyxel Switch Hacks Blamed on Patched Flaw Actually Exploited a Zero-Day appeared first on\u2026",
+   "icon": "\ud83d\udfe0",
+   "id": "https://www.securityweek.com/zyxel-switch-hacks-blamed-on-patched-flaw-actually-exploited-a-zero-day/",
+   "link": "https://www.securityweek.com/zyxel-switch-hacks-blamed-on-patched-flaw-actually-exploited-a-zero-day/",
+   "rule": "Zero-day in a major vendor",
+   "source": "SecurityWeek",
+   "title": "Zyxel Switch Hacks Blamed on Patched Flaw Actually Exploited a Zero-Day"
+  },
+  {
+   "detail": "Zyxel GS1900 network switches that received the vendor's earlier fix for an actively exploited flaw are still open to the exploit attackers used, researchers at Binarly found. The exploit lets anyone who can reach a switch's web management\u2026",
+   "icon": "\ud83d\udfe0",
+   "id": "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html",
+   "link": "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html",
+   "rule": "Zero-day in a major vendor",
+   "source": "The Hacker News",
+   "title": "Zyxel GS1900 Patch Fails to Block Zero-Day Exploit Allowing Root Command Execution"
+  },
+  {
+   "detail": "",
+   "icon": "\ud83d\udfe0",
+   "id": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOUUtJY0pob0tIOWJwSmpkZXE3Ul9fUlo2dElHajFka1J5SUR6dVBzRzVrTTZJRjQ0VDhCOU9Ya0xabXZiOVRCekZ5d0hJVjVqZG83MTZpaEdtaXJINzlDRnAyaXU4R2YwQ0tkLUJRaG1NbXFZWUlDQXlSVGJwYTd6REZlVEJjYWVQQ3ZFQ3d4aG1yeUtWNHg3U05KeWRBd3JkR2lrRA?oc=5",
+   "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOUUtJY0pob0tIOWJwSmpkZXE3Ul9fUlo2dElHajFka1J5SUR6dVBzRzVrTTZJRjQ0VDhCOU9Ya0xabXZiOVRCekZ5d0hJVjVqZG83MTZpaEdtaXJINzlDRnAyaXU4R2YwQ0tkLUJRaG1NbXFZWUlDQXlSVGJwYTd6REZlVEJjYWVQQ3ZFQ3d4aG1yeUtWNHg3U05KeWRBd3JkR2lrRA?oc=5",
+   "rule": "Attack on an APAC telco or bank",
+   "source": "www.nationpathindia.com",
+   "title": "CERT-In Issues Critical Alert Over 'Crafty Falcon' AI Cyberattack Targeting India's Financial Sector"
+  },
+  {
+   "detail": "",
+   "icon": "\ud83d\udfe0",
+   "id": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOTkN3d3cwQ2lla0NpSHNiZGhFV21CeGJPbHF4aG5mUEJXel9GbTl0OU5SNUh2VVdyazFFM01uYVBjakp1dWJzRGp4anRpSVdrb25tMVdwRE1KLWhFaHBSa1RsNHVKelY1X1l6aktJVU1Gcm1KSXFCUmFLQ3pmRnpmdThUdTJqaDQtRks3N2FRN2toUldyd1NIQ0x3RDJCVWk3OE94Zi14MVpIYlE?oc=5",
+   "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOTkN3d3cwQ2lla0NpSHNiZGhFV21CeGJPbHF4aG5mUEJXel9GbTl0OU5SNUh2VVdyazFFM01uYVBjakp1dWJzRGp4anRpSVdrb25tMVdwRE1KLWhFaHBSa1RsNHVKelY1X1l6aktJVU1Gcm1KSXFCUmFLQ3pmRnpmdThUdTJqaDQtRks3N2FRN2toUldyd1NIQ0x3RDJCVWk3OE94Zi14MVpIYlE?oc=5",
+   "rule": "Attack on an APAC telco or bank",
+   "source": "Travel Weekly Asia",
+   "title": "Singapore Airlines latest carrier hit by Amadeus data breach"
+  }
+ ],
  "last_morning": "2026-11-05",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
@@ -45,7 +82,9 @@
   "https://news.google.com/rss/articles/CBMiogFBVV95cUxPR29RbmxFZVVLRnpRRVNFNHl3bUhVOHBzelFwektUS2hTWG1QckRpQ1F2SWVLd3dCR2x1cjJJel9lWUdxNVZCbzZHRnRINUhKajZPbml3WE1DUHZXR0FVa0VWNFp5SzVVQ3dUVk5zZ2ktMGFiY3g0dDE4RlVoZGtTemJ6S0VmQ09YNjdZZ3N5cDVCeWlFOEI1el84MVpMZkE5a0E?oc=5": "2026-11-05T11:28:37+00:00",
   "https://news.google.com/rss/articles/CBMiogFBVV95cUxQazhIYlRVdTBOMkM5bk1KOE1La19nLWZMZGdBRnF6OWp3OFo5UFIyeVdoQ2tMYnZldkVkQjlrYXpjbGFYT2JUaVJMOGwyNHlSRlhrQ0lwYlRFY1FqNlN4WjFYajJMMWZ4QUFwcldxNl9VU3Yta2hDUWJuSnQ4Z1gyVE55VlBqbFFLZG15OEM2b2t3eWEybVY2Z0UxX0FZNXRvZkE?oc=5": "2026-10-22T14:04:53+00:00",
   "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbDJScjJndzF1U25pazI2QmFUVmlhdV81VUJSN014VnAta1JYUVdIRkZ4YThJSFNUN3k2OGxGU0FXMHlkd0t6UjItWkhlY2hBMzlab1Q3bHlhTktjWk1aZk1rTjFNUU04SUV4X0RTMy1QdF9XVVoxNWxFQVBuLW9DLVdNQUxXanA5SHo2ZEZ2RGhzeHZQcmlSYnl0YWpjOVkzUHc?oc=5": "2026-10-21T19:35:04+00:00",
+  "https://news.google.com/rss/articles/CBMipAFBVV95cUxOUUtJY0pob0tIOWJwSmpkZXE3Ul9fUlo2dElHajFka1J5SUR6dVBzRzVrTTZJRjQ0VDhCOU9Ya0xabXZiOVRCekZ5d0hJVjVqZG83MTZpaEdtaXJINzlDRnAyaXU4R2YwQ0tkLUJRaG1NbXFZWUlDQXlSVGJwYTd6REZlVEJjYWVQQ3ZFQ3d4aG1yeUtWNHg3U05KeWRBd3JkR2lrRA?oc=5": "2026-11-05T18:57:26+00:00",
   "https://news.google.com/rss/articles/CBMipwFBVV95cUxPNHB4N2hDWjc4VnN5a0lzanktWEZIRXVqWEJnMHkxY0pIQmZWRzF4b1c2d294TzBHM2FtVW5ibXktT2hadlFwQ3lTbjIxOE1RUUZHQWtUNG5aOVViQlJaOUtqckd2WFFsS1NDYnE3NExNR01EdG55TGxnQ3hHOXdFTXAzM051em1HbFJaMV9qUWhMd1lzTUtpSTNRY21qSUo4T0ExQXV0MA?oc=5": "2026-10-27T00:04:21+00:00",
+  "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOTkN3d3cwQ2lla0NpSHNiZGhFV21CeGJPbHF4aG5mUEJXel9GbTl0OU5SNUh2VVdyazFFM01uYVBjakp1dWJzRGp4anRpSVdrb25tMVdwRE1KLWhFaHBSa1RsNHVKelY1X1l6aktJVU1Gcm1KSXFCUmFLQ3pmRnpmdThUdTJqaDQtRks3N2FRN2toUldyd1NIQ0x3RDJCVWk3OE94Zi14MVpIYlE?oc=5": "2026-11-05T18:57:26+00:00",
   "https://news.google.com/rss/articles/CBMisAFBVV95cUxNT1dPdGJXRDB4YVhPYjdlZ3pDdEhvckd4aVlVdWhuRHVqMUFsV0JFVVMtNzI4d2ZNUVZWRjY1SGEzQlRfT0h6RDNYMF9iSG52SWVLOHd3UEcwSlF2emNINmZvUkE3MDJoWWdDaFNkSjlBSnk5TXA3MVE5cDNUMzcxdndCZks0Wjd5VzllX2NWRk91TkY5QnlWVkI0bXFPM3o5OGFYQXZaMGVkejNZTjNjSA?oc=5": "2026-11-05T02:44:58+00:00",
   "https://news.google.com/rss/articles/CBMiswFBVV95cUxPYURLTXJRaHo5blhMdjZyeTZFb0s3dHVIcXQtOTZDbFI2c0FsUUF2RGRLV091RThCYm1UMzA1S1NPaVpYdG9hNU9Pc2liaE9BTlgzYmZrdEZDRHo1OTY2WUZhdlZQYkxUSXNGMlpoOHFIU2pCRXZKdXlYa1huOFhKWlVRQi00SEt4dEM0OGNLUWNpRUMwNG5WLVFzd1ZoeXZfZVlENUwzM3N2VzVSWUphdWluOA?oc=5": "2026-11-04T22:11:00+00:00",
   "https://news.google.com/rss/articles/CBMitgFBVV95cUxNcDhYV0Z5LUxnTm5LUENIUnhjUExYX1E3M1NqY2VLY196VGJ4OHlwc1VVZVQzUFBTdmxRcmxBYnM3N0NWeE9IdjVCUGxJSjJhUENEaHB5WS0teUhib2hXcUFKSE5Va2dtY3NfeHNUVjVBWTQ0R0syZ09DcWJzZmlWZFZpTW1jcy00YTJIUXdVVnFqUER6VUdvYW9aNDAtODVpVnk1SlVtR0ZiR211OUJJZXZxazlvZ9IBuwFBVV95cUxPQ1B5WklsSVZiV1FtbTFFN3BxVzh2a1BqOVU0Ukg1cWxoWDYzbHdmcC1oaUVrZU52UFFScW8zeUszT3VZMHVhbWZ6dUFKVWNJZl9raVNnZ3V5VmVnUlBYM3dUVVVSdjJrZ2lLaldWNjNlWGxHWkNIdDF1S2xSQkNiNnNRNmxUV05OVDNMNzd6bVFGZXFCeVpaeUJWRURSS0FPQVFiYmZkTGROclNwRTM2WmwzNTN0QkE1d2pN?oc=5": "2026-10-16T10:35:53+00:00",
@@ -57,6 +96,7 @@
   "https://thehackernews.com/2026/10/cyberstrikeai-uses-44-ai-agents-to.html": "2026-10-28T00:43:36+00:00",
   "https://thehackernews.com/2026/10/shinyhunters-exploited-oracle.html": "2026-10-28T14:29:08+00:00",
   "https://thehackernews.com/2026/10/state-bank-of-india-confirms-data-leak.html": "2026-10-21T10:34:07+00:00",
+  "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html": "2026-11-05T18:57:26+00:00",
   "https://therecord.media/binance-hit-by-record-6-billion-crypto-hack": "2026-10-30T18:49:46+00:00",
   "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/": "2026-10-27T16:50:55+00:00",
   "https://www.bleepingcomputer.com/news/security/cisco-warns-of-firewall-zero-day-exploited-to-crash-ssl-vpn-devices/": "2026-10-29T19:50:08+00:00",
@@ -66,6 +106,7 @@
   "https://www.securityweek.com/cisco-sd-wan-zero-day-exploitation-tied-to-volt-typhoons-silent-train-network/": "2026-10-29T19:50:08+00:00",
   "https://www.securityweek.com/hackers-steal-2-6-million-records-from-sonys-japanese-isp-so-net/": "2026-10-29T19:50:08+00:00",
   "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/": "2026-10-27T16:50:55+00:00",
-  "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/": "2026-10-27T16:50:55+00:00"
+  "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/": "2026-10-27T16:50:55+00:00",
+  "https://www.securityweek.com/zyxel-switch-hacks-blamed-on-patched-flaw-actually-exploited-a-zero-day/": "2026-11-05T18:57:26+00:00"
  }
 }
