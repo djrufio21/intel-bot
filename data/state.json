@@ -1,25 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQWnpMazUxUUVoQ0JES1VIOHQtMHp3bEo5cUJYX0RtZW5TQ19UOWJPYThHRlMxY29BODBBYjNGRkZiMVFPamY3S0lMSkNDb1p4bWtwNXRObW1lZVZ5dUpwOTJ4MU1kNVg3dU15ZTVER3hWanBMXzkxOW9sVmJhYVZ1WU1zdnBaS1Roc3lBZzU0alVVMUs3TkVUa1hfeENZajkyYktET2VHT1NUZUtCcWY0aDZVbUY3RWVtb21QSEpOVDF1aF90NlNpaGxDcTZqNHo5aHFF?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQWnpMazUxUUVoQ0JES1VIOHQtMHp3bEo5cUJYX0RtZW5TQ19UOWJPYThHRlMxY29BODBBYjNGRkZiMVFPamY3S0lMSkNDb1p4bWtwNXRObW1lZVZ5dUpwOTJ4MU1kNVg3dU15ZTVER3hWanBMXzkxOW9sVmJhYVZ1WU1zdnBaS1Roc3lBZzU0alVVMUs3TkVUa1hfeENZajkyYktET2VHT1NUZUtCcWY0aDZVbUY3RWVtb21QSEpOVDF1aF90NlNpaGxDcTZqNHo5aHFF?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "PYOK",
-   "title": "Singapore Airlines is Latest Global Carrier to Be Caught Up in Massive Amadeus Data Breach"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPYURLTXJRaHo5blhMdjZyeTZFb0s3dHVIcXQtOTZDbFI2c0FsUUF2RGRLV091RThCYm1UMzA1S1NPaVpYdG9hNU9Pc2liaE9BTlgzYmZrdEZDRHo1OTY2WUZhdlZQYkxUSXNGMlpoOHFIU2pCRXZKdXlYa1huOFhKWlVRQi00SEt4dEM0OGNLUWNpRUMwNG5WLVFzd1ZoeXZfZVlENUwzM3N2VzVSWUphdWluOA?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPYURLTXJRaHo5blhMdjZyeTZFb0s3dHVIcXQtOTZDbFI2c0FsUUF2RGRLV091RThCYm1UMzA1S1NPaVpYdG9hNU9Pc2liaE9BTlgzYmZrdEZDRHo1OTY2WUZhdlZQYkxUSXNGMlpoOHFIU2pCRXZKdXlYa1huOFhKWlVRQi00SEt4dEM0OGNLUWNpRUMwNG5WLVFzd1ZoeXZfZVlENUwzM3N2VzVSWUphdWluOA?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "The Malaysian Reserve",
-   "title": "Singapore Airlines becomes latest carrier affected by data breach"
-  }
- ],
- "last_morning": "2026-11-04",
+ "held": [],
+ "last_morning": "2026-11-05",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
