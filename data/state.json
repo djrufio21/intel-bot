@@ -1,5 +1,15 @@
 {
- "held": [],
+ "held": [
+  {
+   "detail": "D-Link shared mitigation measures for multiple unpatched security flaws affecting DGS-3130 series managed Gigabit stackable switches. [...]",
+   "icon": "\ud83d\udfe0",
+   "id": "https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/",
+   "link": "https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/",
+   "rule": "Zero-day in a major vendor",
+   "source": "BleepingComputer",
+   "title": "D-Link warns of multiple zero-days in DGS-3130 Series switches"
+  }
+ ],
  "last_morning": "2026-11-06",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
@@ -66,6 +76,7 @@
   "https://therecord.media/binance-hit-by-record-6-billion-crypto-hack": "2026-10-30T18:49:46+00:00",
   "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/": "2026-10-27T16:50:55+00:00",
   "https://www.bleepingcomputer.com/news/security/cisco-warns-of-firewall-zero-day-exploited-to-crash-ssl-vpn-devices/": "2026-10-29T19:50:08+00:00",
+  "https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/": "2026-11-06T21:02:18+00:00",
   "https://www.bleepingcomputer.com/news/security/zyxel-fixes-zero-day-exploited-to-hack-nearly-1-000-network-switches/": "2026-11-05T02:44:58+00:00",
   "https://www.darkreading.com/cyberattacks-data-breaches/state-bank-india-customer-pii-data-leak": "2026-10-23T07:55:29+00:00",
   "https://www.darkreading.com/endpoint-security/beyondtrust-remote-support-exploited-edge-bugs": "2026-10-16T22:11:26+00:00",
