@@ -1,16 +1,6 @@
 {
- "held": [
-  {
-   "detail": "D-Link shared mitigation measures for multiple unpatched security flaws affecting DGS-3130 series managed Gigabit stackable switches. [...]",
-   "icon": "\ud83d\udfe0",
-   "id": "https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/",
-   "link": "https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/",
-   "rule": "Zero-day in a major vendor",
-   "source": "BleepingComputer",
-   "title": "D-Link warns of multiple zero-days in DGS-3130 Series switches"
-  }
- ],
- "last_morning": "2026-11-06",
+ "held": [],
+ "last_morning": "2026-11-07",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
