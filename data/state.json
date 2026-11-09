@@ -1,16 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQWTZFVlo0RTI5cUhZQXJGcTNiYzZYZ2ZjT1NMb3p1eVI0Wll6ejVkQXVKZzlSREhYOS0xd3FITG1BM1VlQ0pMTTNQNFZxeGpvRjU4ZlM5ZWZZWWF4b3dnWmxnUFJ5cHp4dHotVDVjT001MjV4eW5hbE5oTE5CQ3p3bkNMUmdLSXFRQ0VZMW15QQ?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQWTZFVlo0RTI5cUhZQXJGcTNiYzZYZ2ZjT1NMb3p1eVI0Wll6ejVkQXVKZzlSREhYOS0xd3FITG1BM1VlQ0pMTTNQNFZxeGpvRjU4ZlM5ZWZZWWF4b3dnWmxnUFJ5cHp4dHotVDVjT001MjV4eW5hbE5oTE5CQ3p3bkNMUmdLSXFRQ0VZMW15QQ?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "The 420.in",
-   "title": "Malaysia Orders Cybersecurity Review After Bank Rakyat Website Hack"
-  }
- ],
- "last_morning": "2026-11-08",
+ "held": [],
+ "last_morning": "2026-11-09",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
