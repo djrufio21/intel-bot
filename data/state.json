@@ -1,34 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPTVZWUERmaVgwRXFOT19jX3JmQjlXQmRfR1dZUWJnUlRxM0dpRzRGY3R1SnZGbXRNNGI4RDQ5bDE1Q2tnd0MxeGFWTjM0aVN4Rk5QRlVBeUdmSWN5Z1VYVzJUSVdQcVpsTDVtQ0xiT1BUN3N5NVZtbWV6bFd4VmJramJ1OHN3b2RHSkxUck9wR3RZWi00RHpJR2JLcXZVaDQ5QkE?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPTVZWUERmaVgwRXFOT19jX3JmQjlXQmRfR1dZUWJnUlRxM0dpRzRGY3R1SnZGbXRNNGI4RDQ5bDE1Q2tnd0MxeGFWTjM0aVN4Rk5QRlVBeUdmSWN5Z1VYVzJUSVdQcVpsTDVtQ0xiT1BUN3N5NVZtbWV6bFd4VmJramJ1OHN3b2RHSkxUck9wR3RZWi00RHpJR2JLcXZVaDQ5QkE?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "The Straits Times",
-   "title": "Singapore\u2019s blood bank systems unaffected by French cyberattack: HSA"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNc2p1S0tVVDE5cm5rVWtrZnZ1Q1JadGlqS1JkczJTQm1Sa2o0ZnR3OHp3OWVkYkhYTUxIUVNPQ1o1MjgtQWM4QmJESlJhVlBDSmgxVUlvcjRSRkoySGRUZUR4MVlTdWRPdjZoQVdfUkR5dUFZZVdzRkZIM0otcXNENDRic0JiOVdKUzF5THdmMTJSYlQzdkxtUnpoQVVjMjBLS2E0VHpROEpTVmRYVUo4UzdKUUwwOXZaV1FuWkYzVTJPOHF5OGltZjl4WHhobUx20gFaQVVfeXFMTl9QbUdlYnRKbnBIYThfa2Y4cmx1emNvQ0N2cWJqZUtRLU1qQ05yQXdKQy1IZDBTa084MjczcnMwSTJBaXdlR2huUGpxTkVWRGdVQVRORHNRMHhR?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNc2p1S0tVVDE5cm5rVWtrZnZ1Q1JadGlqS1JkczJTQm1Sa2o0ZnR3OHp3OWVkYkhYTUxIUVNPQ1o1MjgtQWM4QmJESlJhVlBDSmgxVUlvcjRSRkoySGRUZUR4MVlTdWRPdjZoQVdfUkR5dUFZZVdzRkZIM0otcXNENDRic0JiOVdKUzF5THdmMTJSYlQzdkxtUnpoQVVjMjBLS2E0VHpROEpTVmRYVUo4UzdKUUwwOXZaV1FuWkYzVTJPOHF5OGltZjl4WHhobUx20gFaQVVfeXFMTl9QbUdlYnRKbnBIYThfa2Y4cmx1emNvQ0N2cWJqZUtRLU1qQ05yQXdKQy1IZDBTa084MjczcnMwSTJBaXdlR2huUGpxTkVWRGdVQVRORHNRMHhR?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "MLex",
-   "title": "Japan telecom panel to examine site blocking to curb data-breach harms"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNSmRwQ2hEWGJYQVhRck9pQTRrQWhLSVVPbTY0cC1PeEY5Zm5qLS1jTENFWTZFTjJPbTA5WTVHVnVfcmlyMGQxSHBGaXVncEhaazBSb296VnFERjB1SUxZQnN2Wm5vTUxTVEtMbWxWY2lCUjJPSlp1UGF0UHJJU3RzdjZla2FmTlZUUWFoeVJRdktJOG9UYXc?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNSmRwQ2hEWGJYQVhRck9pQTRrQWhLSVVPbTY0cC1PeEY5Zm5qLS1jTENFWTZFTjJPbTA5WTVHVnVfcmlyMGQxSHBGaXVncEhaazBSb296VnFERjB1SUxZQnN2Wm5vTUxTVEtMbWxWY2lCUjJPSlp1UGF0UHJJU3RzdjZla2FmTlZUUWFoeVJRdktJOG9UYXc?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "eSecurity Planet",
-   "title": "MS&AD Data Breach Tops 1 Million Records as Japan Insurers Report New Leaks"
-  }
- ],
- "last_morning": "2026-11-10",
+ "held": [],
+ "last_morning": "2026-11-11",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
