@@ -1,25 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMiekFVX3lxTE40TzdIRUVhX3dnWW0wZmJkMWFsaEZ1MFJsMTNnN21qSUk1UUMtd2l0d1l5akt1LUI3QU1kZnJvSkJRVlhyX2xtVy15bktYX29vWVAyZ2ROMzRoUzhSakRuSGwxMF9hWWdzeVpteDhKZXJrRmNlVHRLcndR?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE40TzdIRUVhX3dnWW0wZmJkMWFsaEZ1MFJsMTNnN21qSUk1UUMtd2l0d1l5akt1LUI3QU1kZnJvSkJRVlhyX2xtVy15bktYX29vWVAyZ2ROMzRoUzhSakRuSGwxMF9hWWdzeVpteDhKZXJrRmNlVHRLcndR?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "Cryptopolitan",
-   "title": "South Korea\u2019s financial cyber watchdog breached as attacks spread"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPWmdFOGdvTEpEc1haeldWSWN1MVJUZDVSQzVVMk03QXQ1RG84ODNpMFJucHdKY2tfbXpnOTREZlI4VUJES1llbmZsUmwwQVV6eGNNbmdjRXRmM0N5Q2o0SVNtWkFQdmtfSU5nRE16Q1BKOHlhRFRHZll4MklQM2lCRFMxb0JqSzlwLWhsMjVB?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPWmdFOGdvTEpEc1haeldWSWN1MVJUZDVSQzVVMk03QXQ1RG84ODNpMFJucHdKY2tfbXpnOTREZlI4VUJES1llbmZsUmwwQVV6eGNNbmdjRXRmM0N5Q2o0SVNtWkFQdmtfSU5nRE16Q1BKOHlhRFRHZll4MklQM2lCRFMxb0JqSzlwLWhsMjVB?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "Crypto News",
-   "title": "After Bithumb, hackers hit South Korea\u2019s financial security agency"
-  }
- ],
- "last_morning": "2026-11-11",
+ "held": [],
+ "last_morning": "2026-11-12",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
