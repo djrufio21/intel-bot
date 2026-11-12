@@ -1,5 +1,33 @@
 {
- "held": [],
+ "held": [
+  {
+   "detail": "",
+   "icon": "\ud83d\udfe0",
+   "id": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9SWnRRQmZORC1KMTE0dGlkQTZtTVBvREhna2ZGM3pJNXFyNlVmbGNWRXU2Mk4tRy1IYTVFR3V3cE9YeGgyT25XandZM1lqV2w4MmkwcWhjUFZlcUJqcmRSd2I0QQ?oc=5",
+   "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9SWnRRQmZORC1KMTE0dGlkQTZtTVBvREhna2ZGM3pJNXFyNlVmbGNWRXU2Mk4tRy1IYTVFR3V3cE9YeGgyT25XandZM1lqV2w4MmkwcWhjUFZlcUJqcmRSd2I0QQ?oc=5",
+   "rule": "Attack on an APAC telco or bank",
+   "source": "NHK\u30cb\u30e5\u30fc\u30b9",
+   "title": "Muji operator apologizes for data breach | NHK WORLD-JAPAN News"
+  },
+  {
+   "detail": "",
+   "icon": "\ud83d\udfe0",
+   "id": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE11QzhKaUhrc1NJZ1dWX1hneEx2dVdidWJQdks1YWUwRWNmX1p2eU1YcXFnZmVpZE9HTWNHM3RvYkV3WVg0SWI4emFSb1hQTk5lbk9tSi1aa3prREc2UURSNzZkQjMzaE9X?oc=5",
+   "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE11QzhKaUhrc1NJZ1dWX1hneEx2dVdidWJQdks1YWUwRWNmX1p2eU1YcXFnZmVpZE9HTWNHM3RvYkV3WVg0SWI4emFSb1hQTk5lbk9tSi1aa3prREc2UURSNzZkQjMzaE9X?oc=5",
+   "rule": "Attack on an APAC telco or bank",
+   "source": "Nation Thailand",
+   "title": "Hackers strike Thailand as airlines and banks\u2019 Data are targeted | The Next Move EP.39"
+  },
+  {
+   "detail": "",
+   "icon": "\ud83d\udfe0",
+   "id": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPd3RPUjN5b1JBUG9XMXNITGxrTHE2MnZRcDNQc3pueDR4QUtoZEV2M0hsQ2hHSzJVdzh0cjlLdVhucTRmWlBlcHpQUzd1UGw5dFB5NHMwUml5c2o0cXN3ZTR5cnNaY1ZIek10RExuOGdOQXhWSWppRGFCUHpwLWFpSFN6MFRhT09ZWERyX181dkNra3VZck5ENXBqYw?oc=5",
+   "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPd3RPUjN5b1JBUG9XMXNITGxrTHE2MnZRcDNQc3pueDR4QUtoZEV2M0hsQ2hHSzJVdzh0cjlLdVhucTRmWlBlcHpQUzd1UGw5dFB5NHMwUml5c2o0cXN3ZTR5cnNaY1ZIek10RExuOGdOQXhWSWppRGFCUHpwLWFpSFN6MFRhT09ZWERyX181dkNra3VZck5ENXBqYw?oc=5",
+   "rule": "Attack on an APAC telco or bank",
+   "source": "ForkLog",
+   "title": "South Korea Strengthens Crypto Exchange Security Amid Cyberattack Surge"
+  }
+ ],
  "last_morning": "2026-11-12",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
@@ -32,8 +60,10 @@
   "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBfZEppMDZnbjZuOUxmemQ1M1BaNFNrLUVZaTdNUU96TkZSV1A1bnFFaFpYcWlrRC1WX0pnZHlZUHNHQWlnSmxCa21qTVczT3pPc1BTQ0hRRF8tQQ?oc=5": "2026-10-30T00:19:22+00:00",
   "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1rclFRYzlWRHUtX2RGMWNkS2puNm5veTEwMXZNN09fTTladzRkMi0zOGwwSkRiZktjeVg0LVM2eDdWVTNrMWZ5Sy1BZkhHbVFaeGxoRXB4cnVyTUJ5VUE?oc=5": "2026-10-27T16:50:55+00:00",
   "https://news.google.com/rss/articles/CBMiY0FVX3lxTE8tRmctbHVvNFk2cGJGOG5zcU5Jb0tuSXRnczBJem9WRy01a0xLaERpQlZVLUJ3RzVPeGhUb1RHcWtwM0ZibVBxRkpsSkVMMV9sRXczX1BfOVhjamhMOU5OMXlWSQ?oc=5": "2026-11-06T00:33:22+00:00",
+  "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9SWnRRQmZORC1KMTE0dGlkQTZtTVBvREhna2ZGM3pJNXFyNlVmbGNWRXU2Mk4tRy1IYTVFR3V3cE9YeGgyT25XandZM1lqV2w4MmkwcWhjUFZlcUJqcmRSd2I0QQ?oc=5": "2026-11-12T20:25:14+00:00",
   "https://news.google.com/rss/articles/CBMi_wJBVV95cUxOblpjT2hqTGhQdGotVEJ5V2otM2V0ODNLSW9SWFhvVXJYUmwyUFpHY0I2ZEo1aVhtUWJXazZpUzFvakNiNjZ0T0c4M0Fmc1B6YVVDRExwaFNFUG1LS2ZvRDBVNmdjZjhUSDZkSlVvSHA0Ymw4cnFlYjFZMVpiZldteUlBOUY3OUJxWm53WXRmeG1idUZCTmJra0h4SEd0RlpKaTR0LUNXcDJLYWh4ZkxWYXo5ZjJGTU04RDJxeXNmRWlYS1RaU3d5ZDZDa3YxYTVscV9DVGd6X2pJMGhTcWZkNzlhLUZjRGJMYXdtaERpeWNHTlI0M1R5MGxZN0h1Z1VoOWRQSjVFUjg2QktQX1NlNkk5Wmg4MHJuZVdmVUZQVVUtRzNIbWQ0cmVRbFE0Zk5PczZBNTMzZE0xZ2tsUEM5OHJNbHVleC10YTRZZy1xbmkzQWpTLTlmUmFuODNiSFo4LWhHMjlrdlgweDZCejEzZEpaNU9pektLb09TcU9Fbw?oc=5": "2026-11-06T07:22:28+00:00",
   "https://news.google.com/rss/articles/CBMia0FVX3lxTE5Rb3FBUWVrVEVCZUhFMVFhbVhsRTZEbDZWdm9xUnBGSG50eE9YQVN1b2h3TW81dVMwREJKUG5HVGl5dUI1WXZ2WHdXNWM2TWl4bjk0MXg1YTlmQnRDakhyS000YU5BLVowS2Vn0gFrQVVfeXFMTlFvcUFRZWtURUJlSEUxUWFtWGxFNkRsNlZ2b3FScEZIbnR4T1hBU3VvaHdNbzV1UzBEQkpQbkdUaXl1QjVZdnZYd1c1YzZNaXhuOTQxeDVhOWZCdENqSHJLTTRhTkEtWjBLZWc?oc=5": "2026-10-20T17:30:45+00:00",
+  "https://news.google.com/rss/articles/CBMiaEFVX3lxTE11QzhKaUhrc1NJZ1dWX1hneEx2dVdidWJQdks1YWUwRWNmX1p2eU1YcXFnZmVpZE9HTWNHM3RvYkV3WVg0SWI4emFSb1hQTk5lbk9tSi1aa3prREc2UURSNzZkQjMzaE9X?oc=5": "2026-11-12T20:25:14+00:00",
   "https://news.google.com/rss/articles/CBMic0FVX3lxTFBjVko3OWZIZ0EzTzZGX3dHNXdKdmx1VzZ3S0sybVUtM2lSY0FzWUVaSzNFWmpreWZSNlhJSTJJU2Y2QlNQVGhydUxnUkplOTRQeWpBLTN3RVR5ZzZuUmRDRElqNXNIUk1mSEtfYnRDcDZfUkE?oc=5": "2026-10-30T18:49:46+00:00",
   "https://news.google.com/rss/articles/CBMidkFVX3lxTE1idG52Z2ZDMkQ1SkFKaEhVUlNaaGdYamJ1N1ZxMGdOYkhkNkg5b0h6RWNhZy1iR29CRi1ER3hVUHc2WFI0OVE3Xzh5QmZzR2hSVDNZNDJQdEhzZ3lEY1pMZlBYY0xROXI0V1EwMUtHaDJaS2hOa3c?oc=5": "2026-10-16T10:35:53+00:00",
   "https://news.google.com/rss/articles/CBMidkFVX3lxTE5MQ2pubHZSS1hVVGZUN0VEeGNNWHR4M3B2UTA4ZmVEVlJnRC1vejRkbkdRbjVIczBGUFcyWm9zcGlxY3kyVDVyQkJUWHlVVS11Y0ZzY2NCVjFEOGJwSzRaaGRQalFJcnZOcDJWMHNGOWtMQy1remc?oc=5": "2026-10-24T23:41:00+00:00",
@@ -53,6 +83,7 @@
   "https://news.google.com/rss/articles/CBMilgFBVV95cUxNSmRwQ2hEWGJYQVhRck9pQTRrQWhLSVVPbTY0cC1PeEY5Zm5qLS1jTENFWTZFTjJPbTA5WTVHVnVfcmlyMGQxSHBGaXVncEhaazBSb296VnFERjB1SUxZQnN2Wm5vTUxTVEtMbWxWY2lCUjJPSlp1UGF0UHJJU3RzdjZla2FmTlZUUWFoeVJRdktJOG9UYXc?oc=5": "2026-11-10T18:13:43+00:00",
   "https://news.google.com/rss/articles/CBMimgFBVV95cUxOUnA5UHV3SXJkaWItQ0VxRTVMSkZzWlRCRUNJSjI2Y2l4anZaNVFqOTM2aWRXMEQ4bVh5a21rRk13cko0Z094LTE5c2xjdkRkLVZiTDczQTI1LUs0cVhRRVF1TVI2SXFKbldDZEJoWjQycGZzZFMteDk0eFhGU0drWlRRMmhWb1h1Q3BEX1pTUklaeDJ3YzdOZ0pn?oc=5": "2026-10-23T18:42:00+00:00",
   "https://news.google.com/rss/articles/CBMimwFBVV95cUxPT1NuanA1WjExdGp6OVNMUGdxNnQxUkUzU2l3eTI3YUE1QXQxaDQwOVgtbUtpRGRtdmRxakNxU0pOZm1ZRTBZQ0EzOEVfV3dyaE5TdnhnNzJSM3JkUTZzN01ROUdTbWxNbGd5alVla2xKZC16cXQ4a2FYMTdqa2VKbzlldzFfdVRwT1NDbV9KX0hEUS1mc0NCbUY4Yw?oc=5": "2026-10-20T17:30:45+00:00",
+  "https://news.google.com/rss/articles/CBMimwFBVV95cUxPd3RPUjN5b1JBUG9XMXNITGxrTHE2MnZRcDNQc3pueDR4QUtoZEV2M0hsQ2hHSzJVdzh0cjlLdVhucTRmWlBlcHpQUzd1UGw5dFB5NHMwUml5c2o0cXN3ZTR5cnNaY1ZIek10RExuOGdOQXhWSWppRGFCUHpwLWFpSFN6MFRhT09ZWERyX181dkNra3VZck5ENXBqYw?oc=5": "2026-11-12T20:25:14+00:00",
   "https://news.google.com/rss/articles/CBMinAFBVV95cUxNWl83b0h4Z2dZQkQzVlRVUTMtaTZ4aWtYY1hwcDhYT2x6M3d3eVkxaXg5aHRfZmdlaEVjcFZXSjk1TkM5NWdpUVo3RDB4M3g0VDVhZkpkV0c4c3p1QVYzbkdaM3dycE95SkVoOUp3SDI4TXg1c0Iyc0FPRFgyUUx3LWJtRmp4MDE1Y19NdzRfUUZQcm1RaGI5YkVfWW0?oc=5": "2026-11-07T19:36:08+00:00",
   "https://news.google.com/rss/articles/CBMinwFBVV95cUxPSEg1QmFsSmdZYUxTc1k2SDE0ZUpwWnBkcWhORlUybS0xMXp5akV5bDNfNl9pMVRpX2lXTjlLcGJCamxLdHhwaG1ISmZHRGZGMHZPWWlodFB6RjRXem9pcURKaGZmNWpYT1dIRlhjVENjZEl6ZmhYS2pkMTBQZFJEWVctcFRlTTliUkhMZV9wVUxiQ1lGY2VFS1JlREpFcW8?oc=5": "2026-11-06T00:33:22+00:00",
   "https://news.google.com/rss/articles/CBMiogFBVV95cUxOUl9nU3NGM0RCUkpDakh6bW1YMVBjWTJhR3ZpcXhudlV2MkdZdlBtNFE4eHRXdm43RDNjcnlLRnM5eHdhVF9XcDkwOUJOQk9oclE2aFRZekVZVkVzOENFUHJwMkdZak1wNWY3MlNjOThtR2ZDd01nX0tiSDNjWjlVZ0xRblFYUnprWHotX3hFajJzMTh0Sl90SGs2ZThIYnlaNnc?oc=5": "2026-10-29T06:26:12+00:00",
