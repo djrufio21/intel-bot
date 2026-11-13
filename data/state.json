@@ -1,34 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9SWnRRQmZORC1KMTE0dGlkQTZtTVBvREhna2ZGM3pJNXFyNlVmbGNWRXU2Mk4tRy1IYTVFR3V3cE9YeGgyT25XandZM1lqV2w4MmkwcWhjUFZlcUJqcmRSd2I0QQ?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9SWnRRQmZORC1KMTE0dGlkQTZtTVBvREhna2ZGM3pJNXFyNlVmbGNWRXU2Mk4tRy1IYTVFR3V3cE9YeGgyT25XandZM1lqV2w4MmkwcWhjUFZlcUJqcmRSd2I0QQ?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "NHK\u30cb\u30e5\u30fc\u30b9",
-   "title": "Muji operator apologizes for data breach | NHK WORLD-JAPAN News"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE11QzhKaUhrc1NJZ1dWX1hneEx2dVdidWJQdks1YWUwRWNmX1p2eU1YcXFnZmVpZE9HTWNHM3RvYkV3WVg0SWI4emFSb1hQTk5lbk9tSi1aa3prREc2UURSNzZkQjMzaE9X?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE11QzhKaUhrc1NJZ1dWX1hneEx2dVdidWJQdks1YWUwRWNmX1p2eU1YcXFnZmVpZE9HTWNHM3RvYkV3WVg0SWI4emFSb1hQTk5lbk9tSi1aa3prREc2UURSNzZkQjMzaE9X?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "Nation Thailand",
-   "title": "Hackers strike Thailand as airlines and banks\u2019 Data are targeted | The Next Move EP.39"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPd3RPUjN5b1JBUG9XMXNITGxrTHE2MnZRcDNQc3pueDR4QUtoZEV2M0hsQ2hHSzJVdzh0cjlLdVhucTRmWlBlcHpQUzd1UGw5dFB5NHMwUml5c2o0cXN3ZTR5cnNaY1ZIek10RExuOGdOQXhWSWppRGFCUHpwLWFpSFN6MFRhT09ZWERyX181dkNra3VZck5ENXBqYw?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPd3RPUjN5b1JBUG9XMXNITGxrTHE2MnZRcDNQc3pueDR4QUtoZEV2M0hsQ2hHSzJVdzh0cjlLdVhucTRmWlBlcHpQUzd1UGw5dFB5NHMwUml5c2o0cXN3ZTR5cnNaY1ZIek10RExuOGdOQXhWSWppRGFCUHpwLWFpSFN6MFRhT09ZWERyX181dkNra3VZck5ENXBqYw?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "ForkLog",
-   "title": "South Korea Strengthens Crypto Exchange Security Amid Cyberattack Surge"
-  }
- ],
- "last_morning": "2026-11-12",
+ "held": [],
+ "last_morning": "2026-11-13",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
