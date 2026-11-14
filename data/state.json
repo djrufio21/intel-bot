@@ -1,16 +1,6 @@
 {
- "held": [
-  {
-   "detail": "Check Point Software has released emergency hotfixes to address a high-severity flaw that hackers have been exploiting to gain root privileges and establish persistence on vulnerable devices since late October. [...]",
-   "icon": "\ud83d\udfe0",
-   "id": "https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/",
-   "link": "https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/",
-   "rule": "Zero-day in a major vendor",
-   "source": "BleepingComputer",
-   "title": "Check Point warns of zero-day flaw exploited for root access"
-  }
- ],
- "last_morning": "2026-11-13",
+ "held": [],
+ "last_morning": "2026-11-14",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
