@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths: [".github/workflows/grab-connect.yml"]
-  workflow_dispatch: # run again after changing GRAB_PLACES or ANTHROPIC_API_KEY
+  workflow_dispatch: # run again after changing GRAB_PLACES, ANTHROPIC_API_KEY or GOOGLE_TTS_KEY
 
 env:
   GRAB_WORKER_URL: https://intel-bot-grab.raj-intel.workers.dev
@@ -19,13 +19,14 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_TTS_KEY: ${{ secrets.GOOGLE_TTS_KEY }}
           GRAB_PLACES: ${{ secrets.GRAB_PLACES }}
         run: |
           [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ] && {
             echo "::error::TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID secrets are needed. See the README setup."; exit 1; }
 
           payload=$(python3 -c 'import json, os
-          keys = ("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "ANTHROPIC_API_KEY", "GRAB_PLACES")
+          keys = ("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "ANTHROPIC_API_KEY", "GOOGLE_TTS_KEY", "GRAB_PLACES")
           print(json.dumps({k: os.environ[k] for k in keys if os.environ.get(k)}))')
           result=$(curl -sS -X POST "$GRAB_WORKER_URL/setup" -H 'Content-Type: application/json' -d "$payload")
           echo "Grab helper: $result"
@@ -41,9 +42,9 @@ jobs:
             \"allowed_updates\": [\"message\", \"edited_message\"],
             \"drop_pending_updates\": true }" > /dev/null
           curl -fsS "$api/setMyCommands" -H 'Content-Type: application/json' -d '{"commands": [
-            {"command": "help", "description": "How to ask for a ride or food"},
+            {"command": "help", "description": "What Jarvis can do"},
             {"command": "places", "description": "Your saved places"},
             {"command": "id", "description": "Show this chat ID"}]}' > /dev/null
           curl -fsS "$api/sendMessage" -H 'Content-Type: application/json' \
-            -d "{\"chat_id\": \"$TELEGRAM_CHAT_ID\", \"text\": \"Grab helper is live. Try: ride to KLCC\"}" > /dev/null
+            -d "{\"chat_id\": \"$TELEGRAM_CHAT_ID\", \"text\": \"Jarvis is online, sir. Send a voice note, or try: ride to KLCC\"}" > /dev/null
           echo "Connected."
