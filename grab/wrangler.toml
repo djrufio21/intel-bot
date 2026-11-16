@@ -1,4 +1,4 @@
-# Cloudflare Worker that answers your Grab requests in Telegram.
+# Cloudflare Worker that runs Jarvis and the Grab helper in Telegram.
 # Deployed to the raj-intel.workers.dev account. Settings reach it through the
 # "Connect Grab helper" workflow, never through this file.
 
@@ -11,8 +11,32 @@ workers_dev = true
 binding = "CONFIG"
 id = "b191a2b47c374b0c882ea7f5d25ac78c"
 
+# Workers AI: listens to voice notes, and is the free fallback for thinking and speaking.
+[ai]
+binding = "AI"
+
 [vars]
+# Who thinks for Jarvis. "free" uses the Workers AI model below and costs nothing.
+# "claude" uses the paid Anthropic API, and only if the ANTHROPIC_API_KEY secret is set.
+BRAIN = "free"
 AI_MODEL = "claude-haiku-5-5"
+FREE_CHAT_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+
+# Cloudflare gives 10,000 free Workers AI "neurons" a day. Jarvis estimates what he
+# uses and stops at this budget, then waits until 8 AM. The Workers AI voice is the
+# costly part, so once only VOICE_RESERVE is left the phone's own voice takes over
+# and the rest is kept for thinking.
+DAILY_NEURON_BUDGET = "7000"
+VOICE_RESERVE = "2000"
+
+# Voice. Google's British voice is used when the GOOGLE_TTS_KEY secret is set.
+# The cap stops Google use for the month before its free allowance (1 million
+# characters for this voice family) runs out; the free Workers AI voice takes over.
+TTS_VOICE = "en-GB-Neural2-B"
+TTS_MONTHLY_CHAR_CAP = "800000"
+STT_MODEL = "@cf/openai/whisper"
+FREE_TTS_MODEL = "@cf/deepgram/aura-1"
+FREE_TTS_SPEAKER = "helios"
 
 # How the "Open in Grab" button opens the app. {placeholders} are filled in and
 # any parameter left empty is dropped. Grab does not publish these formats for

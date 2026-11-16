@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1014">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="/jarvis/manifest.json">
+<link rel="icon" href="/jarvis/icon.svg">
+<title>Jarvis</title>
+<style>
+  :root { --bg:#0b1014; --panel:#141b21; --line:#243039; --ink:#e9eef1; --muted:#8a99a4; --gold:#e8b45a; --gold-dim:#8a6b35; }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; -webkit-tap-highlight-color:transparent; }
+  main { height:100dvh; max-width:520px; margin:0 auto; display:flex; flex-direction:column; padding:max(14px,env(safe-area-inset-top)) 16px max(14px,env(safe-area-inset-bottom)); }
+  header { display:flex; align-items:center; justify-content:space-between; padding:2px 2px 10px; }
+  h1 { margin:0; font-size:15px; font-weight:600; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); }
+  .switch { display:flex; align-items:center; gap:8px; font-size:14px; color:var(--muted); }
+  .switch input { appearance:none; width:42px; height:24px; border-radius:12px; background:var(--line); position:relative; margin:0; transition:background .2s; }
+  .switch input::after { content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:var(--muted); transition:transform .2s, background .2s; }
+  .switch input:checked { background:var(--gold-dim); }
+  .switch input:checked::after { transform:translateX(18px); background:var(--gold); }
+
+  #log { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:10px; padding:6px 2px 12px; scrollbar-width:none; }
+  #log::-webkit-scrollbar { display:none; }
+  .msg { max-width:88%; padding:10px 14px; border-radius:16px; overflow-wrap:anywhere; }
+  .you { align-self:flex-end; background:var(--line); border-bottom-right-radius:4px; color:var(--ink); }
+  .jarvis { align-self:flex-start; background:var(--panel); border:1px solid var(--line); border-bottom-left-radius:4px; }
+  .card { max-width:100%; }
+  .card a { color:var(--gold); text-decoration:none; }
+  .card a.btn { display:block; margin-top:10px; padding:12px; border-radius:12px; background:var(--gold); color:#1a1205; font-weight:600; text-align:center; }
+  .card a.btn + a.btn { background:transparent; color:var(--gold); border:1px solid var(--gold-dim); }
+  .hello { color:var(--muted); align-self:center; text-align:center; margin:auto 0; padding:0 12px; }
+
+  .stage { display:flex; flex-direction:column; align-items:center; gap:12px; padding:6px 0 14px; }
+  #status { margin:0; min-height:1.5em; font-size:14px; color:var(--muted); letter-spacing:.04em; }
+  #orb { position:relative; width:132px; height:132px; border-radius:50%; border:2px solid var(--gold-dim); background:radial-gradient(circle at 50% 50%, #1b242b 0 58%, transparent 59%); padding:0; cursor:pointer; touch-action:manipulation; }
+  #orb::before { content:""; position:absolute; inset:38px; border-radius:50%; background:var(--gold); opacity:.9; transition:transform .25s, opacity .25s; }
+  #orb::after { content:""; position:absolute; inset:-10px; border-radius:50%; border:2px solid var(--gold); opacity:0; }
+  #orb:focus-visible { outline:2px solid var(--gold); outline-offset:6px; }
+  body[data-state="listening"] #orb { border-color:var(--gold); }
+  body[data-state="listening"] #orb::before { animation:breathe 1.2s ease-in-out infinite; }
+  body[data-state="listening"] #orb::after { animation:ring 1.6s ease-out infinite; }
+  body[data-state="thinking"] #orb { border-style:dashed; border-color:var(--gold); animation:turn 2.4s linear infinite; }
+  body[data-state="thinking"] #orb::before { opacity:.45; transform:scale(.8); }
+  body[data-state="speaking"] #orb::before { animation:speak .5s ease-in-out infinite alternate; }
+  @keyframes breathe { 50% { transform:scale(1.18); } }
+  @keyframes ring { 0% { transform:scale(.92); opacity:.7; } 100% { transform:scale(1.25); opacity:0; } }
+  @keyframes turn { to { transform:rotate(360deg); } }
+  @keyframes speak { from { transform:scale(.86); } to { transform:scale(1.14); } }
+  @media (prefers-reduced-motion:reduce) { #orb, #orb::before, #orb::after { animation:none !important; } }
+
+  .chips { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .chips button { font:inherit; font-size:14px; color:var(--ink); background:transparent; border:1px solid var(--line); border-radius:999px; padding:7px 14px; }
+  form { display:flex; gap:8px; }
+  #box { flex:1; min-width:0; font:inherit; color:var(--ink); background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:11px 14px; }
+  #box::placeholder { color:var(--muted); }
+  #box:focus { outline:none; border-color:var(--gold-dim); }
+  form button { font:inherit; font-weight:600; color:var(--gold); background:transparent; border:1px solid var(--gold-dim); border-radius:12px; padding:0 16px; }
+  .notice { margin:0 0 10px; padding:12px 14px; border-radius:12px; background:var(--panel); border:1px solid var(--gold-dim); font-size:14px; }
+  .notice a { display:block; margin-top:10px; padding:11px; border-radius:10px; background:var(--gold); color:#1a1205; font-weight:600; text-align:center; text-decoration:none; }
+  #locked { height:100dvh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; padding:24px; }
+  #locked p { margin:0; color:var(--muted); max-width:300px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body data-state="idle">
+<main id="app" hidden>
+  <header>
+    <h1>Jarvis</h1>
+    <label class="switch"><input type="checkbox" id="handsfree"> Hands-free</label>
+  </header>
+  <div id="notice" class="notice" hidden></div>
+  <section id="log" aria-live="polite">
+    <p class="hello" id="hello"></p>
+  </section>
+  <div class="stage">
+    <p id="status" role="status">Tap to speak</p>
+    <button id="orb" type="button" aria-label="Talk to Jarvis"></button>
+    <div class="chips">
+      <button type="button" data-ask="My briefing">My briefing</button>
+      <button type="button" data-ask="What can you do?">What can you do?</button>
+    </div>
+  </div>
+  <form id="typed">
+    <input id="box" placeholder="Or type here" autocomplete="off" enterkeyhint="send" aria-label="Type to Jarvis">
+    <button type="submit">Send</button>
+  </form>
+</main>
+<section id="locked" hidden>
+  <h1>Jarvis</h1>
+  <p>This app is locked. In Telegram, send <b>/app</b> to your bot and tap <b>Open Jarvis</b>.</p>
+</section>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  };
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  // The key arrives once in the link from Telegram and is then kept on this phone.
+  const fromLink = new URLSearchParams(location.hash.slice(1)).get("k") || new URLSearchParams(location.search).get("k");
+  if (fromLink) {
+    store.set("jarvis_key", fromLink);
+    history.replaceState(null, "", "/jarvis");
+  }
+  const key = store.get("jarvis_key") || fromLink;
+  if (!key) { $("locked").hidden = false; return; }
+  $("app").hidden = false;
+
+  const log = $("log"), statusLine = $("status"), handsFree = $("handsfree");
+  let state = "idle", rec = null, stopCurrent = null, silentTurns = 0, listenNext = false, wake = null, turns = 0;
+  const audio = new Audio();
+  let audioReady = false;
+
+  const hour = new Date().getHours();
+  $("hello").textContent = `Good ${hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening"}, sir. Tap the circle and speak.`;
+
+  if (!Recognition) {
+    const n = $("notice");
+    n.hidden = false;
+    n.textContent = "This browser can't listen. Open Jarvis in Chrome to talk. You can still type below.";
+    if (/Android/i.test(navigator.userAgent)) {
+      const a = document.createElement("a");
+      a.href = `intent://${location.host}/jarvis?k=${encodeURIComponent(key)}#Intent;scheme=https;package=com.android.chrome;end`;
+      a.textContent = "Open in Chrome";
+      n.append(a);
+    }
+    statusLine.textContent = "Type below";
+  } else if (!matchMedia("(display-mode: standalone)").matches && !store.get("jarvis_tip")) {
+    const n = $("notice");
+    n.hidden = false;
+    n.textContent = "Tip: tap ⋮ in Chrome and choose Add to Home screen to keep Jarvis as an app.";
+    n.onclick = () => { n.hidden = true; store.set("jarvis_tip", "1"); };
+  }
+
+  function set(next, label) {
+    state = next;
+    document.body.dataset.state = next;
+    statusLine.textContent = label;
+  }
+  const idle = () => set("idle", Recognition ? "Tap to speak" : "Type below");
+
+  function add(who, text) {
+    $("hello").hidden = true;
+    const el = document.createElement("div");
+    el.className = "msg " + who;
+    el.textContent = text;
+    log.append(el);
+    log.scrollTop = log.scrollHeight;
+    return el;
+  }
+
+  // A Grab plan or the briefing. The server has already escaped everything in it.
+  function card(html, buttons) {
+    const el = add("jarvis card", "");
+    el.innerHTML = html.replace(/\n/g, "<br>");
+    for (const b of buttons || []) {
+      const a = document.createElement("a");
+      a.className = "btn";
+      a.href = b.url;
+      a.textContent = b.text;
+      el.append(a);
+    }
+    for (const a of el.querySelectorAll("a")) { a.target = "_blank"; a.rel = "noopener"; }
+    log.scrollTop = log.scrollHeight;
+  }
+
+  const post = (path, text) => fetch(path, {
+    method: "POST",
+    headers: { "content-type": "application/json", authorization: "Bearer " + key },
+    body: JSON.stringify({ text }),
+  });
+
+  function lock() {
+    store.set("jarvis_key", "");
+    $("app").hidden = true;
+    $("locked").hidden = false;
+  }
+
+  async function ask(text, bubble) {
+    if (!bubble) add("you", text);
+    const turn = ++turns;
+    set("thinking", "Thinking");
+    let data;
+    try {
+      const r = await post("/jarvis/ask", text);
+      if (r.status === 401) return lock();
+      data = await r.json();
+    } catch {
+      data = { say: "I can't reach the server, sir. Check your connection." };
+    }
+    if (!data.say) data.say = "Something went wrong on my side, sir.";
+    if (data.html) card(data.html, data.buttons); else add("jarvis", data.say);
+    await speak(data.say);
+    if (turn !== turns) return; // a newer request has taken over
+    const again = listenNext || (handsFree.checked && Recognition && !document.hidden);
+    listenNext = false;
+    if (again) listen(); else idle();
+  }
+
+  // The server's voice first. If it has none to spare, the phone's own voice reads the answer.
+  async function speak(text) {
+    set("speaking", "Tap to interrupt");
+    let stopped = false;
+    stopCurrent = () => { stopped = true; };
+    try {
+      let played = false;
+      try {
+        const r = await post("/jarvis/voice", text);
+        if (r.status === 200 && !stopped) {
+          const url = URL.createObjectURL(await r.blob());
+          played = stopped || (await play(url));
+          URL.revokeObjectURL(url);
+        }
+      } catch {}
+      if (!played && !stopped) await phoneVoice(text);
+    } finally {
+      stopCurrent = null;
+    }
+  }
+
+  function play(url) {
+    return new Promise((done) => {
+      audio.src = url;
+      audio.onended = () => done(true);
+      audio.onerror = () => done(false);
+      stopCurrent = () => { audio.pause(); done(true); };
+      audio.play().catch(() => done(false));
+    });
+  }
+
+  function phoneVoice(text) {
+    return new Promise((done) => {
+      if (!("speechSynthesis" in window)) return done();
+      const voices = speechSynthesis.getVoices().filter((v) => /^en[-_]GB/i.test(v.lang));
+      const voice = voices.find((v) => /male/i.test(v.name) && !/female/i.test(v.name)) || voices[0];
+      // Short pieces, because long passages get cut off on some phones.
+      const parts = (text.match(/[^.!?]+[.!?]*/g) || [text]).map((p) => p.trim()).filter(Boolean);
+      let left = parts.length;
+      speechSynthesis.cancel();
+      stopCurrent = () => { speechSynthesis.cancel(); done(); };
+      for (const part of parts) {
+        const u = new SpeechSynthesisUtterance(part);
+        if (voice) u.voice = voice;
+        u.lang = "en-GB";
+        u.pitch = 0.9;
+        u.onend = u.onerror = () => { if (--left <= 0) done(); };
+        speechSynthesis.speak(u);
+      }
+    });
+  }
+
+  function listen() {
+    if (!Recognition || rec) return;
+    let heard = "", bubble = null;
+    rec = new Recognition();
+    rec.lang = "en-GB";
+    rec.interimResults = true;
+    rec.onresult = (e) => {
+      heard = [...e.results].map((r) => r[0].transcript).join("");
+      bubble = bubble || add("you", "");
+      bubble.textContent = heard;
+      log.scrollTop = log.scrollHeight;
+    };
+    rec.onerror = (e) => {
+      if (e.error === "not-allowed" || e.error === "service-not-allowed") {
+        handsFree.checked = false;
+        silentTurns = 9;
+        statusLine.dataset.problem = "Allow the microphone for this page, then tap again";
+      }
+    };
+    rec.onend = () => {
+      rec = null;
+      const said = heard.trim();
+      const problem = statusLine.dataset.problem;
+      delete statusLine.dataset.problem;
+      if (said) { silentTurns = 0; return ask(said, bubble); }
+      silentTurns++;
+      // Hands-free gives up after two silences, so it never listens to an empty room for long.
+      if (handsFree.checked && silentTurns < 2 && !document.hidden) return listen();
+      if (problem) set("idle", problem); else idle();
+    };
+    try {
+      rec.start();
+      set("listening", "Listening");
+    } catch {
+      rec = null;
+      idle();
+    }
+  }
+
+  $("orb").onclick = () => {
+    if (!audioReady) {
+      // A tap lets the page play sound later without another tap.
+      audioReady = true;
+      audio.src = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=";
+      audio.play().catch(() => {});
+    }
+    silentTurns = 0;
+    if (state === "listening") return rec && rec.stop();
+    if (state === "thinking") return;
+    if (state === "speaking") { listenNext = Boolean(Recognition); return stopCurrent && stopCurrent(); }
+    if (Recognition) listen(); else $("box").focus();
+  };
+
+  $("typed").onsubmit = (e) => {
+    e.preventDefault();
+    const text = $("box").value.trim();
+    if (!text || state === "thinking") return;
+    $("box").value = "";
+    if (stopCurrent) stopCurrent();
+    if (rec) rec.abort();
+    ask(text);
+  };
+
+  for (const chip of document.querySelectorAll("[data-ask]")) {
+    chip.onclick = () => { if (state === "idle") ask(chip.dataset.ask); };
+  }
+
+  // Hands-free keeps the screen awake, since listening stops when the screen sleeps.
+  async function keepAwake() {
+    try {
+      if (handsFree.checked && "wakeLock" in navigator && !document.hidden) wake = await navigator.wakeLock.request("screen");
+      else if (wake) { await wake.release(); wake = null; }
+    } catch {}
+  }
+  handsFree.checked = store.get("jarvis_handsfree") === "1" && Boolean(Recognition);
+  handsFree.disabled = !Recognition;
+  handsFree.onchange = () => { store.set("jarvis_handsfree", handsFree.checked ? "1" : "0"); silentTurns = 0; keepAwake(); };
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { if (rec) rec.abort(); if (stopCurrent) stopCurrent(); }
+    keepAwake();
+  });
+  keepAwake();
+  if ("speechSynthesis" in window) speechSynthesis.getVoices();
+})();
+</script>
+</body>
+</html>

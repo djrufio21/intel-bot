@@ -1,21 +1,30 @@
-// Grab helper for Intel Bot.
+// Jarvis and the Grab helper for Intel Bot.
 //
-// Telegram sends every message you type to this Worker (a webhook). The Worker
-// works out where you want to go or what you want to eat, then replies with a
-// button that opens the Grab app with the trip filled in. You confirm and pay
-// inside Grab. Nothing here can book or pay on its own.
+// Telegram sends every message you type or speak to this Worker (a webhook).
+// The Worker works out what you want. For a ride or food it replies with a
+// button that opens the Grab app with the trip filled in; you confirm and pay
+// inside Grab, and nothing here can book or pay on its own. For anything else
+// it answers as Jarvis. A voice note gets a spoken answer back.
 //
-// The Worker never holds the bot token. It answers inside Telegram's webhook
-// request, which Telegram allows, so the token stays in GitHub.
+// Typed messages are answered inside Telegram's own webhook request. Voice needs
+// more: the Worker has to download your voice note and upload its spoken reply,
+// and both need the bot token. So the token is stored here once voice is set up.
 //
 // The "Connect Grab helper" workflow sends your settings to /setup along with the
 // bot token. The Worker checks the token with Telegram, locks itself to that bot
-// on first use, keeps only a fingerprint of the token, and stores in the CONFIG
-// KV namespace:
+// on first use, and stores in the CONFIG KV namespace:
+//   TELEGRAM_BOT_TOKEN the bot token, used only to fetch and send voice notes
 //   TELEGRAM_CHAT_ID   the only chat that gets answers
-//   ANTHROPIC_API_KEY  optional; without it only simple phrasing works
+//   ANTHROPIC_API_KEY  optional and paid; only used when BRAIN is set to "claude"
+//   GOOGLE_TTS_KEY     optional; the British voice. Without it a free Workers AI voice is used
 //   GRAB_PLACES        optional JSON of saved places (kept out of the public repo)
-// Telegram then calls /telegram with the same fingerprint as its secret token.
+// Telegram then calls /telegram with a fingerprint of the token as its secret.
+//
+// The Worker also serves the Jarvis app at /jarvis: a page you add to your home
+// screen and talk to. The phone does the listening; the Worker thinks and speaks.
+// The app is locked with a private key that only /app in your Telegram chat hands out.
+
+import PAGE from "./jarvis.html";
 
 const UA = "intel-bot-grab/1.0 (personal use)";
 
@@ -23,6 +32,7 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname === "/go") return goPage(url, env);
+    if (url.pathname === "/jarvis" || url.pathname.startsWith("/jarvis/")) return jarvisApp(request, env, url);
     if (request.method === "POST" && url.pathname === "/setup") return setup(request, env);
     if (request.method === "POST" && url.pathname === "/telegram") {
       const config = (await env.CONFIG.get("config", "json")) || {};
@@ -32,13 +42,23 @@ export default {
       }
       const update = await request.json();
       const cfg = { ...env, ...config };
+      const msg = update.message || update.edited_message;
+      if (msg && (msg.voice || msg.audio) && isOwner(msg, cfg)) {
+        if (!cfg.TELEGRAM_BOT_TOKEN || !env.AI) {
+          return Response.json(reply(cfg, msg.chat.id, "Voice isn't switched on yet. Run <b>Connect Grab helper</b> in GitHub Actions once, then try again."));
+        }
+        // Listening, thinking and speaking take a few seconds, so answer Telegram
+        // now and finish in the background.
+        ctx.waitUntil(handleVoice(msg, cfg, url.origin));
+        return new Response("ok");
+      }
       let answer = null;
       try {
         answer = await handleUpdate(update, cfg, url.origin);
       } catch (err) {
         console.error(err);
       }
-      // The reply travels back in this response, so no bot token is needed here.
+      // A typed reply travels back in this response, so it needs no bot token.
       return answer ? Response.json(answer) : new Response("ok");
     }
     return new Response("Intel Bot Grab helper is running.");
@@ -58,7 +78,7 @@ async function sameText(a, b) {
 }
 
 // The webhook secret Telegram sends with every message. The workflow derives the
-// same value from the bot token, so the token itself is never stored here.
+// same value from the bot token.
 const webhookSecret = (token) => sha256(token + "-grab-webhook").then((h) => h.slice(0, 48));
 
 async function setup(request, env) {
@@ -79,7 +99,8 @@ async function setup(request, env) {
     return Response.json({ ok: false, error: "This helper is locked to a different bot" }, { status: 403 });
   }
   const config = { bot_id: me.result.id, webhook_secret: await webhookSecret(token) };
-  for (const k of ["TELEGRAM_CHAT_ID", "ANTHROPIC_API_KEY", "GRAB_PLACES"]) {
+  config.TELEGRAM_BOT_TOKEN = token;
+  for (const k of ["TELEGRAM_CHAT_ID", "ANTHROPIC_API_KEY", "GOOGLE_TTS_KEY", "GRAB_PLACES"]) {
     if (body[k]) config[k] = String(body[k]).trim();
   }
   if (config.GRAB_PLACES) {
@@ -110,28 +131,31 @@ function reply(env, chatId, text, buttons) {
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const HELP = [
-  "<b>Grab helper</b>",
-  "Tell me where to go or what to eat, in plain words:",
+  "<b>Jarvis</b>",
+  "Send /app to open the talking Jarvis app. Here you can type or send a voice note.",
+  "Ask for <i>my briefing</i> any time.",
+  "",
+  "<b>Grab</b>",
   "• <i>ride to KLCC</i>",
   "• <i>grab from office to home, 6 seater</i>",
   "• <i>food: nasi lemak</i>",
   "• or send a location pin to get a ride there",
-  "",
   "I prepare the trip and you confirm it in the Grab app.",
+  "",
   "/places shows your saved places. /id shows this chat's ID.",
 ].join("\n");
+
+const isOwner = (msg, env) => String(msg.chat.id) === String(env.TELEGRAM_CHAT_ID ?? "").trim();
 
 async function handleUpdate(update, env, origin) {
   const msg = update.message || update.edited_message;
   if (!msg) return null;
   const chatId = msg.chat.id;
   // Only answer you. Anyone else who finds the bot gets nothing.
-  if (String(chatId) !== String(env.TELEGRAM_CHAT_ID).trim()) {
+  if (!isOwner(msg, env)) {
     if ((msg.text || "").trim() === "/id") return reply(env, chatId, `Chat ID: <code>${chatId}</code>`);
     return null;
   }
-
-  const places = savedPlaces(env);
 
   if (msg.location || msg.venue) {
     const loc = msg.venue?.location || msg.location;
@@ -144,40 +168,147 @@ async function handleUpdate(update, env, origin) {
   if (!text) return null;
   if (text === "/start" || text === "/help") return reply(env, chatId, HELP);
   if (text === "/id") return reply(env, chatId, `Chat ID: <code>${chatId}</code>`);
+  if (text === "/brief") return (await respond(env, chatId, "my briefing", origin)).answer;
+  if (text === "/app" || text === "/app new") {
+    const key = await appKey(env, text === "/app new");
+    return reply(env, chatId, [
+      "<b>Jarvis app</b>",
+      "1. Tap the button below.",
+      "2. If it opens inside Telegram, tap ⋮ and choose <b>Open in Chrome</b>.",
+      "3. In Chrome, tap ⋮ and choose <b>Add to Home screen</b>.",
+      "",
+      "This link is your key. Keep it to yourself. <code>/app new</code> replaces it and locks out the old one.",
+    ].join("\n"), [[{ text: "Open Jarvis", url: `${origin}/jarvis#k=${key}` }]]);
+  }
   if (text === "/places") {
+    const places = savedPlaces(env);
     const names = Object.keys(places);
     return reply(env, chatId, names.length
       ? "<b>Saved places</b>\n" + names.map((n) => `• ${esc(n)}: ${esc(places[n].label)}`).join("\n")
       : "No saved places yet. Add the GRAB_PLACES secret in GitHub, then run Connect Grab helper.");
   }
+  return (await respond(env, chatId, text, origin)).answer;
+}
 
+// Works out what a typed or spoken request needs. Returns the Telegram message
+// to send (answer), the line Jarvis says aloud (say), and card: true when the
+// message is more than the spoken line (a Grab plan or the briefing).
+async function respond(env, chatId, text, origin) {
+  const places = savedPlaces(env);
+  const history = await loadHistory(env);
+  const done = async (answer, say, card = false) => {
+    await saveHistory(env, history, text, say);
+    return { answer: await answer, say, card };
+  };
+
+  // Asking for the briefing needs no thinking, so it works even with the allowance spent.
+  if (wantsBrief(text)) {
+    const brief = await buildBrief(env);
+    return done(reply(env, chatId, brief.html), brief.say, true);
+  }
+
+  const canThink = usesClaude(env) || Boolean(env.AI);
+  const spent = canThink && !usesClaude(env) && (await budgetLeft(env)) < 100;
   let request;
   try {
-    request = env.ANTHROPIC_API_KEY ? await understandWithAI(env, text, places) : understandSimply(text);
+    request = canThink && !spent ? await think(env, text, places, history) : understandSimply(text);
   } catch (err) {
     console.error(err);
     request = understandSimply(text);
   }
+  if (spent && request.intent === "unknown") {
+    return { answer: reply(env, chatId, esc(SPENT) + " Your briefing and plain Grab requests still work: <i>my briefing</i>, <i>ride to KLCC</i>, <i>food: nasi lemak</i>."), say: SPENT, card: false };
+  }
+
+  if (request?.intent === "brief") {
+    const brief = await buildBrief(env);
+    return done(reply(env, chatId, brief.html), brief.say, true);
+  }
+  if (request?.intent === "chat" && request.say) {
+    return done(reply(env, chatId, esc(request.say)), request.say);
+  }
   if (!request || request.intent === "unknown") {
-    return reply(env, chatId, esc(request?.question || "I didn't catch that.") + "\n\n" + HELP);
+    const say = request?.question || "I didn't catch that.";
+    return done(reply(env, chatId, esc(say) + "\n\n" + HELP), say);
   }
 
   if (request.intent === "food") {
-    return sendPlan(env, chatId, origin, { intent: "food", query: request.food_query || text, note: request.note });
+    const query = request.food_query || text;
+    return done(
+      sendPlan(env, chatId, origin, { intent: "food", query, note: request.note }),
+      `GrabFood is ready with ${query}, sir. Pick a restaurant and check out in the app.`,
+      true,
+    );
   }
 
   const dropoff = await resolvePlace(request.dropoff, places);
   if (!dropoff) {
-    return reply(env, chatId, `I couldn't find <b>${esc(request.dropoff || "the destination")}</b> on the map. Try a fuller name, or send a location pin.`);
+    const what = request.dropoff || "the destination";
+    return done(
+      reply(env, chatId, `I couldn't find <b>${esc(what)}</b> on the map. Try a fuller name, or send a location pin.`),
+      `I couldn't find ${what} on the map, sir. Try a fuller name.`,
+    );
   }
   // No pickup means Grab uses your phone's current location, which is usually what you want.
   const pickup = request.pickup ? await resolvePlace(request.pickup, places) : null;
   if (request.pickup && !pickup) {
-    return reply(env, chatId, `I couldn't find the pickup <b>${esc(request.pickup)}</b>. Try a fuller name.`);
+    return done(
+      reply(env, chatId, `I couldn't find the pickup <b>${esc(request.pickup)}</b>. Try a fuller name.`),
+      `I couldn't find the pickup point, ${request.pickup}, sir. Try a fuller name.`,
+    );
   }
-  return sendPlan(env, chatId, origin, {
-    intent: "ride", pickup, dropoff, ride_type: request.ride_type, when: request.when, note: request.note,
-  });
+  const plan = { intent: "ride", pickup, dropoff, ride_type: request.ride_type, when: request.when, note: request.note };
+  const short = (p) => p.label.split(",")[0];
+  return done(
+    sendPlan(env, chatId, origin, plan),
+    `Your ride to ${short(dropoff)}${pickup ? ` from ${short(pickup)}` : ""} is ready, sir. Check the pins and confirm in Grab.`,
+    true,
+  );
+}
+
+// ---------- Staying free ----------
+// Everything here runs on free allowances. Cloudflare's free plan stops by itself
+// when its daily Workers AI allowance (10,000 "neurons") runs out. Jarvis also
+// keeps his own estimate of what each request uses and stops below that
+// allowance, so a busy day ends with a polite refusal and never with a bill.
+// The estimates follow Cloudflare's published prices and lean high.
+
+const SPENT = "That is today's free allowance used up, sir. I'll be back at eight tomorrow morning.";
+const usesClaude = (env) => env.BRAIN === "claude" && Boolean(env.ANTHROPIC_API_KEY);
+const todayKey = () => "neurons:" + new Date().toISOString().slice(0, 10); // resets at 00:00 UTC, 8 AM in Malaysia
+const cost = {
+  think: (prompt, answer) => Math.ceil((prompt.length / 4) * 0.027 + (answer.length / 4) * 0.21) + 5,
+  hear: (seconds) => Math.ceil((seconds / 60) * 45) + 5,
+  speak: (chars) => Math.ceil(chars * 1.4),
+};
+
+async function budgetLeft(env) {
+  return (Number(env.DAILY_NEURON_BUDGET) || 0) - (Number(await env.CONFIG.get(todayKey())) || 0);
+}
+
+async function charge(env, neurons) {
+  const key = todayKey();
+  const used = Number(await env.CONFIG.get(key)) || 0;
+  await env.CONFIG.put(key, String(used + neurons), { expirationTtl: 3 * 86400 });
+}
+
+// A short memory of the last few exchanges, so follow-up questions make sense.
+// It clears itself after three quiet hours.
+async function loadHistory(env) {
+  try {
+    return (await env.CONFIG.get("history", "json")) || [];
+  } catch {
+    return [];
+  }
+}
+
+async function saveHistory(env, history, heard, said) {
+  const next = [...history, { you: heard.slice(0, 500), jarvis: String(said || "").slice(0, 1200) }].slice(-6);
+  try {
+    await env.CONFIG.put("history", JSON.stringify(next), { expirationTtl: 3 * 3600 });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 async function sendPlan(env, chatId, origin, plan) {
@@ -233,6 +364,8 @@ function savedPlaces(env) {
   }
 }
 
+const wantsBrief = (text) => text.length < 80 && /\b(brief(ing)?|headlines)\b/i.test(text);
+
 // Works without an API key for the common phrasings.
 function understandSimply(text) {
   const t = text.replace(/\s+/g, " ").trim();
@@ -245,40 +378,371 @@ function understandSimply(text) {
   return { intent: "unknown" };
 }
 
-async function understandWithAI(env, text, places) {
+async function think(env, text, places, history) {
   const now = new Date().toLocaleString("en-GB", { timeZone: "Asia/Kuala_Lumpur", dateStyle: "full", timeStyle: "short" });
-  const system = `You turn a short Telegram message into a Grab request for a user in Kuala Lumpur, Malaysia.
+  const earlier = history.map((h) => `Him: ${h.you}\nYou: ${h.jarvis}`).join("\n");
+  const system = `You are Jarvis, a personal assistant on Telegram for one man in Kuala Lumpur, Malaysia. He types or sends voice notes, and your "say" line is read aloud to him.
+Manner: a calm, capable English butler with dry wit. Brief and plain. Call him "sir" now and then, not in every line.
 Current time in Malaysia: ${now}.
-Saved place names (use them exactly when the user means one): ${Object.keys(places).join(", ") || "none"}.
+
+What you can do today: answer questions from general knowledge, think things through with him, read him his briefing (Malaysia news, cyber threats and APAC cyber policy), and prepare Grab rides and GrabFood searches that he confirms in the Grab app.
+What you cannot do yet: read his email or calendar, search the web, or see live information such as weather, traffic or prices. Your only news is the briefing; if one was read earlier in this conversation you may discuss what it said, and nothing beyond it. You never book or pay for anything. If he asks for one of these, say so plainly in one line. Never make up such information.
+
+Saved place names (use them exactly when he means one): ${Object.keys(places).join(", ") || "none"}.
 Reply with one JSON object only, no other text:
-{"intent":"ride"|"food"|"unknown",
- "pickup": saved place name, or a searchable place like "Mid Valley Megamall, Kuala Lumpur", or null for the user's current location,
+{"intent":"ride"|"food"|"brief"|"chat"|"unknown",
+ "pickup": for rides, a saved place name, or a searchable place like "Mid Valley Megamall, Kuala Lumpur", or null for his current location,
  "dropoff": same rules, required for rides,
  "ride_type": e.g. "GrabCar", "GrabCar 6-seater", "JustGrab", "GrabCar Premium", or null,
- "when": a plain time like "today 7:00 PM" if the user wants a later ride, else null,
+ "when": a plain time like "today 7:00 PM" if he wants a later ride, else null,
  "food_query": for food, the dish or restaurant to search, e.g. "nasi lemak",
- "note": one short helpful line or null,
+ "note": for rides and food, one short helpful line or null,
+ "say": for chat, your spoken answer: one to three short sentences, plain words, no lists, no markdown, no emoji,
  "question": if intent is unknown, one short clarifying question}
-Add ", Malaysia" or ", Singapore" to non-saved places so a map search finds them. Never invent addresses.`;
-  const resp = await fetch("https://api.anthropic.com/v1/messages", {
+Use "ride" or "food" only when he wants one now. Use "brief" when he asks for his briefing, the news, or what is happening today. Everything else is "chat".
+Add ", Malaysia" or ", Singapore" to non-saved places so a map search finds them. Never invent addresses.${earlier ? `\n\nThe conversation so far:\n${earlier}` : ""}`;
+
+  let out;
+  if (usesClaude(env)) {
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        model: env.AI_MODEL || "claude-haiku-5-5",
+        max_tokens: 500,
+        system,
+        messages: [{ role: "user", content: text }],
+      }),
+    });
+    if (!resp.ok) throw new Error(`Anthropic ${resp.status}: ${await resp.text()}`);
+    const data = await resp.json();
+    out = (data.content || []).map((b) => b.text || "").join("");
+  } else {
+    // The free Workers AI model does the thinking.
+    const data = await env.AI.run(env.FREE_CHAT_MODEL, {
+      messages: [{ role: "system", content: system }, { role: "user", content: text }],
+      max_tokens: 500,
+    });
+    out = typeof data.response === "string" ? data.response : JSON.stringify(data.response ?? "");
+    await charge(env, cost.think(system + text, out));
+  }
+  const from = out.indexOf("{"), to = out.lastIndexOf("}");
+  if (from === -1 || to <= from) return out.trim() ? { intent: "chat", say: out.trim() } : { intent: "unknown" };
+  try {
+    return JSON.parse(out.slice(from, to + 1));
+  } catch {
+    return { intent: "unknown" };
+  }
+}
+
+// ---------- Voice ----------
+
+const MAX_VOICE_SECONDS = 120;
+
+function telegram(env, method, body) {
+  const isForm = body instanceof FormData;
+  return fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`, {
     method: "POST",
-    headers: {
-      "x-api-key": env.ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01",
-      "content-type": "application/json",
-    },
+    ...(isForm ? { body } : { headers: { "content-type": "application/json" }, body: JSON.stringify(body) }),
+  }).then((r) => r.json());
+}
+
+async function handleVoice(msg, env, origin) {
+  const chatId = msg.chat.id;
+  const text = (t) => telegram(env, "sendMessage", reply(env, chatId, t));
+  try {
+    const note = msg.voice || msg.audio;
+    if (note.duration > MAX_VOICE_SECONDS) return await text("That one runs over two minutes, sir. A shorter note, please.");
+    if ((await budgetLeft(env)) < 100) return await text(SPENT);
+    await telegram(env, "sendChatAction", { chat_id: chatId, action: "record_voice" });
+
+    const file = await telegram(env, "getFile", { file_id: note.file_id });
+    if (!file.ok) throw new Error("getFile failed: " + JSON.stringify(file));
+    const audio = await fetch(`https://api.telegram.org/file/bot${env.TELEGRAM_BOT_TOKEN}/${file.result.file_path}`);
+    if (!audio.ok) throw new Error("voice download failed: " + audio.status);
+    const heard = await transcribe(env, new Uint8Array(await audio.arrayBuffer()));
+    await charge(env, cost.hear(note.duration || 30));
+    if (!heard) return await text("I couldn't make that out, sir. Could you say it again?");
+
+    const { answer, say, card } = await respond(env, chatId, heard, origin);
+    const heardLine = `🎙 <i>${esc(heard)}</i>`;
+    // A Grab plan or the briefing goes out as its own message; the voice follows it.
+    if (card) await telegram(env, "sendMessage", { ...answer, text: `${heardLine}\n\n${answer.text}` });
+
+    const spoken = await speak(env, say, "ogg");
+    if (!spoken) {
+      if (!card) await text(`${heardLine}\n\n${esc(say)}`);
+      return;
+    }
+    const form = new FormData();
+    form.set("chat_id", String(chatId));
+    form.set("voice", new Blob([spoken], { type: "audio/ogg" }), "jarvis.ogg");
+    if (!card) {
+      form.set("caption", `${heardLine}\n\n${esc(say)}`.slice(0, 1000));
+      form.set("parse_mode", "HTML");
+    }
+    const sent = await telegram(env, "sendVoice", form);
+    if (!sent.ok) {
+      console.error("sendVoice failed", JSON.stringify(sent));
+      if (!card) await text(`${heardLine}\n\n${esc(say)}`);
+    }
+  } catch (err) {
+    console.error(err);
+    await text("Something went wrong on my side, sir. Try again in a moment.").catch(() => {});
+  }
+}
+
+// Speech to text on Workers AI (free daily allowance).
+async function transcribe(env, bytes) {
+  const out = await env.AI.run(env.STT_MODEL, { audio: [...bytes] });
+  return String(out?.text || "").trim();
+}
+
+// Text to speech. Google's British voice when its key is set and the monthly cap
+// has room; otherwise the free Workers AI voice while today's allowance can spare
+// it. Returns audio bytes ("ogg" for a Telegram voice note, "mp3" for the app),
+// or null when no voice is available, in which case the app's own voice reads it.
+const MAX_SPOKEN = 1800;
+
+async function speak(env, say, format) {
+  const text = String(say || "").slice(0, MAX_SPOKEN);
+  if (!text) return null;
+  if (env.GOOGLE_TTS_KEY) {
+    try {
+      const audio = await googleVoice(env, text, format);
+      if (audio) return audio;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  if (!env.AI) return null;
+  try {
+    // Keep enough of the day's allowance back for thinking.
+    const price = cost.speak(text.length);
+    if ((await budgetLeft(env)) - price < (Number(env.VOICE_RESERVE) || 0)) return null;
+    await charge(env, price);
+    const resp = await env.AI.run(
+      env.FREE_TTS_MODEL,
+      { text, speaker: env.FREE_TTS_SPEAKER, ...(format === "ogg" ? { encoding: "opus", container: "ogg" } : { encoding: "mp3" }) },
+      { returnRawResponse: true },
+    );
+    if (!resp.ok) throw new Error(`Workers AI voice ${resp.status}: ${await resp.text()}`);
+    return new Uint8Array(await resp.arrayBuffer());
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
+async function googleVoice(env, text, format) {
+  // Hard stop below Google's free monthly allowance, so the voice can never run up a bill.
+  const cap = Number(env.TTS_MONTHLY_CHAR_CAP) || 0;
+  const month = "tts:" + new Date().toISOString().slice(0, 7);
+  const used = Number(await env.CONFIG.get(month)) || 0;
+  if (used + text.length > cap) {
+    console.warn(`Google voice paused: ${used} of ${cap} characters used this month`);
+    return null;
+  }
+  // Count before calling, so a failed or repeated call can only overcount.
+  await env.CONFIG.put(month, String(used + text.length), { expirationTtl: 70 * 86400 });
+
+  const resp = await fetch("https://texttospeech.googleapis.com/v1/text:synthesize", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-goog-api-key": env.GOOGLE_TTS_KEY },
     body: JSON.stringify({
-      model: env.AI_MODEL || "claude-haiku-5-5",
-      max_tokens: 300,
-      system,
-      messages: [{ role: "user", content: text }],
+      input: { text },
+      voice: { languageCode: env.TTS_VOICE.split("-").slice(0, 2).join("-"), name: env.TTS_VOICE },
+      audioConfig: { audioEncoding: format === "ogg" ? "OGG_OPUS" : "MP3" },
     }),
   });
-  if (!resp.ok) throw new Error(`Anthropic ${resp.status}: ${await resp.text()}`);
-  const data = await resp.json();
-  const out = (data.content || []).map((b) => b.text || "").join("");
-  const json = out.slice(out.indexOf("{"), out.lastIndexOf("}") + 1);
-  return JSON.parse(json);
+  if (!resp.ok) throw new Error(`Google voice ${resp.status}: ${await resp.text()}`);
+  const { audioContent } = await resp.json();
+  return Uint8Array.from(atob(audioContent), (c) => c.charCodeAt(0));
+}
+
+// ---------- The briefing ----------
+// The same picks as the 7 AM message in bot.py, read from the three projects'
+// latest.json. The two patterns mirror malaysia_priority and major_vendors in rules.yml.
+
+const BRIEF_SOURCES = {
+  malaysia: "https://raw.githubusercontent.com/djrufio21/malaysia-daily-brief/main/docs/latest.json",
+  threat: "https://raw.githubusercontent.com/djrufio21/cyber-threat-brief/main/docs/latest.json",
+  policy: "https://raw.githubusercontent.com/djrufio21/apac-cyber-policy-tracker/main/docs/latest.json",
+};
+const MALAYSIA_PRIORITY = /anwar|prime minister|\bpm\b|cabinet|budget|parliament|dewan rakyat|agong|king\b|sultan|minister|bank negara|ringgit|opr\b|flood|haze|landslide|election|by-election|federal court|court of appeal|macc|police|igp|petronas|tariff|subsid|gst|sst|minimum wage|cyber|scam|data breach|outage|death toll|killed/gi;
+const MAJOR_VENDORS = /microsoft|cisco|fortinet|palo alto|ivanti|citrix|vmware|broadcom|apple|google|chrome|android|juniper|huawei|oracle|sap\b|f5\b|check point|sonicwall|atlassian|progress|moveit|veeam|zyxel|d-link|tp-link|samsung|qualcomm|linux kernel|openssh|exchange|fortios|pan-os/i;
+
+function storiesIn(data, sections) {
+  return (data?.sections || []).filter((s) => !sections || sections.includes(s.name)).flatMap((s) => s.stories || []);
+}
+
+// First story that has any preferred tag, else the first story.
+function pickStory(items, prefer = []) {
+  for (const tag of prefer) {
+    const hit = items.find((s) => (s.tags || []).includes(tag));
+    if (hit) return hit;
+  }
+  return items[0] || null;
+}
+
+async function buildBrief(env) {
+  const data = {};
+  await Promise.all(Object.entries(BRIEF_SOURCES).map(async ([key, url]) => {
+    try {
+      const resp = await fetch(url, { headers: { "User-Agent": UA } });
+      if (resp.ok) data[key] = await resp.json();
+    } catch (err) {
+      console.error(err);
+    }
+  }));
+  if (!Object.keys(data).length) {
+    const sorry = "I couldn't reach your briefing sources just now, sir. Try again in a few minutes.";
+    return { say: sorry, html: esc(sorry) };
+  }
+
+  const now = new Date();
+  const hour = Number(now.toLocaleString("en-GB", { timeZone: "Asia/Kuala_Lumpur", hour: "numeric", hour12: false }));
+  const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+  const day = now.toLocaleDateString("en-GB", { timeZone: "Asia/Kuala_Lumpur", weekday: "long", day: "numeric", month: "long" });
+  const link = (s) => (/^https?:\/\//.test(s.link || "") ? `<a href="${esc(s.link)}">${esc(s.title)}</a>` : esc(s.title));
+  // A headline as a spoken sentence.
+  const line = (s) => String(s.title || "").replace(/\s+/g, " ").trim().replace(/^CVE-[\d-]+:\s*/i, "A flaw in ").replace(/[.!?…]+$/, "") + ".";
+  const count = (s) => (String(s.title || "").match(MALAYSIA_PRIORITY) || []).length;
+  const say = [`${greeting}, sir. Here is your briefing for ${day}.`];
+  const html = [`<b>${greeting}, sir</b> · ${esc(day)}`];
+
+  // Most important = covered by the most outlets, then most national-importance words, then newest.
+  const my = storiesIn(data.malaysia, ["Nation"])
+    .sort((a, b) => (b.also?.length || 0) - (a.also?.length || 0) || count(b) - count(a) || String(b.published || "").localeCompare(String(a.published || "")))
+    .slice(0, 2);
+  if (my.length) {
+    html.push("", "🇲🇾 <b>Malaysia</b>", ...my.map((s) => `• ${link(s)}`));
+    say.push(`In Malaysia. ${line(my[0])}` + (my[1] ? ` Also. ${line(my[1])}` : ""));
+  }
+
+  const kev = storiesIn(data.threat, ["Actively Exploited"]);
+  const majors = kev.filter((s) => MAJOR_VENDORS.test(`${s.vendor || ""} ${s.product || ""}`));
+  const topKev = pickStory(majors.length ? majors : kev, ["Ransomware"]);
+  const breaking = storiesIn(data.threat, ["Breaking Threats"]).sort((a, b) => (b.also?.length || 0) - (a.also?.length || 0));
+  const topThreat = pickStory(breaking, ["Zero-day", "Exploited", "Ransomware", "Nation-state"]);
+  const apac = storiesIn(data.threat, ["APAC Watch"])[0];
+  if (topKev || topThreat || apac) {
+    html.push("", "🛡️ <b>Threats</b>");
+    const spoken = ["On threats."];
+    if (topKev) {
+      const ransom = (topKev.tags || []).includes("Ransomware");
+      html.push(`• Exploited now: ${link(topKev)}${ransom ? " · ransomware" : ""}`);
+      spoken.push(`Being exploited now. ${line(topKev)}` + (ransom ? " It is being used by ransomware." : ""));
+      if (kev.length > 1) {
+        html.push(`  <i>${kev.length} exploited flaws added to CISA's list this week</i>`);
+        spoken.push(`${kev.length} exploited flaws joined the CISA list this week.`);
+      }
+    }
+    if (topThreat) {
+      html.push(`• ${link(topThreat)}`);
+      spoken.push(`The leading story. ${line(topThreat)}`);
+    }
+    if (apac) {
+      html.push(`• APAC: ${link(apac)}`);
+      spoken.push(`In the region. ${line(apac)}`);
+    }
+    say.push(spoken.join(" "));
+  }
+
+  const policy = storiesIn(data.policy);
+  const recent = policy.filter((s) => now - new Date(s.published || 0) < 48 * 3600 * 1000);
+  const topPolicy = pickStory(recent.length ? recent : policy, ["New law", "Consultation", "Finance", "Enforcement"]);
+  const dayOf = (iso) => new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", { timeZone: "UTC", day: "numeric", month: "long" });
+  const closing = (data.policy?.closing_soon || [])
+    .filter((c) => /^\d{4}-\d{2}-\d{2}$/.test(c.closes || "") && new Date(c.closes + "T00:00:00Z") - now <= 14 * 86400 * 1000)
+    .slice(0, 2);
+  if (topPolicy || closing.length) {
+    html.push("", "🏛️ <b>Policy</b>");
+    const spoken = ["On policy."];
+    if (topPolicy) {
+      const where = (topPolicy.countries || []).slice(0, 2).join(" and ");
+      html.push(`• ${link(topPolicy)}${where ? ` (${esc(where)})` : ""}`);
+      spoken.push((where ? `From ${where}. ` : "") + line(topPolicy));
+    }
+    for (const c of closing) {
+      html.push(`• ⏳ Closes ${esc(dayOf(c.closes))}: ${link(c)}`);
+      spoken.push(`A consultation closes on ${dayOf(c.closes)}. ${line(c)}`);
+    }
+    say.push(spoken.join(" "));
+  }
+
+  const missing = Object.keys(BRIEF_SOURCES).filter((k) => !data[k]);
+  if (missing.length) say.push(`I could not reach ${missing.length === 1 ? "one of your sources" : "two of your sources"}, so this is partial.`);
+  say.push("That is all for now, sir.");
+  return { say: say.join(" "), html: html.join("\n") };
+}
+
+// ---------- The Jarvis app ----------
+// /jarvis is the page. /jarvis/ask takes what you said and returns the answer;
+// /jarvis/voice turns the answer into speech. Both need the private key.
+
+const ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#0b1014"/><circle cx="256" cy="256" r="150" fill="none" stroke="#e8b45a" stroke-width="18"/><circle cx="256" cy="256" r="96" fill="none" stroke="#e8b45a" stroke-width="8" opacity=".55"/><circle cx="256" cy="256" r="44" fill="#e8b45a"/></svg>`;
+const MANIFEST = {
+  name: "Jarvis", short_name: "Jarvis", start_url: "/jarvis", scope: "/jarvis", display: "standalone",
+  background_color: "#0b1014", theme_color: "#0b1014",
+  icons: [{ src: "/jarvis/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any maskable" }],
+};
+
+// The key that unlocks the app. Made on first use and handed out only by /app in your chat.
+async function appKey(env, renew = false) {
+  let key = renew ? null : await env.CONFIG.get("app_key");
+  if (!key) {
+    key = [...crypto.getRandomValues(new Uint8Array(32))].map((b) => b.toString(16).padStart(2, "0")).join("");
+    await env.CONFIG.put("app_key", key);
+  }
+  return key;
+}
+
+async function jarvisApp(request, env, url) {
+  const json = (body, status = 200) => Response.json(body, { status, headers: { "cache-control": "no-store" } });
+  if (request.method === "GET") {
+    if (url.pathname === "/jarvis") return new Response(PAGE, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "referrer-policy": "no-referrer" } });
+    if (url.pathname === "/jarvis/icon.svg") return new Response(ICON, { headers: { "content-type": "image/svg+xml", "cache-control": "public, max-age=86400" } });
+    if (url.pathname === "/jarvis/manifest.json") return Response.json(MANIFEST);
+    return new Response("not found", { status: 404 });
+  }
+  if (request.method !== "POST") return new Response("not allowed", { status: 405 });
+
+  const given = (request.headers.get("authorization") || "").replace(/^Bearer /, "");
+  const key = await env.CONFIG.get("app_key");
+  if (!key || !given || !(await sameText(given, key))) return json({ error: "locked" }, 401);
+  const config = (await env.CONFIG.get("config", "json")) || {};
+  const cfg = { ...env, ...config };
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ error: "Expected JSON" }, 400);
+  }
+  const text = String(body.text || "").trim();
+  if (!text) return json({ error: "Nothing to answer" }, 400);
+
+  if (url.pathname === "/jarvis/ask") {
+    try {
+      const { answer, say, card } = await respond(cfg, cfg.TELEGRAM_CHAT_ID, text.slice(0, 1000), url.origin);
+      const buttons = (answer.reply_markup?.inline_keyboard || []).flat().map((b) => ({ text: b.text, url: b.url }));
+      return json({ say, html: card ? answer.text : null, buttons });
+    } catch (err) {
+      console.error(err);
+      return json({ say: "Something went wrong on my side, sir. Try again in a moment.", html: null, buttons: [] });
+    }
+  }
+  if (url.pathname === "/jarvis/voice") {
+    const audio = await speak(cfg, text, "mp3");
+    // 204 tells the app to read the answer with the phone's own voice.
+    if (!audio) return new Response(null, { status: 204 });
+    return new Response(audio, { headers: { "content-type": "audio/mpeg", "cache-control": "no-store" } });
+  }
+  return new Response("not found", { status: 404 });
 }
 
 async function resolvePlace(name, places) {
