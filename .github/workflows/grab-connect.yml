@@ -42,9 +42,11 @@ jobs:
             \"allowed_updates\": [\"message\", \"edited_message\"],
             \"drop_pending_updates\": true }" > /dev/null
           curl -fsS "$api/setMyCommands" -H 'Content-Type: application/json' -d '{"commands": [
+            {"command": "app", "description": "Open the talking Jarvis app"},
+            {"command": "brief", "description": "Your briefing, now"},
             {"command": "help", "description": "What Jarvis can do"},
             {"command": "places", "description": "Your saved places"},
             {"command": "id", "description": "Show this chat ID"}]}' > /dev/null
           curl -fsS "$api/sendMessage" -H 'Content-Type: application/json' \
-            -d "{\"chat_id\": \"$TELEGRAM_CHAT_ID\", \"text\": \"Jarvis is online, sir. Send a voice note, or try: ride to KLCC\"}" > /dev/null
+            -d "{\"chat_id\": \"$TELEGRAM_CHAT_ID\", \"text\": \"Jarvis is online, sir. Send /app to open the talking app.\"}" > /dev/null
           echo "Connected."

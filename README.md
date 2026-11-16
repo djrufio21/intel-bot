@@ -46,16 +46,40 @@ You keep your personal messages. The channel gets the same brief and alerts, wit
 
 ## Jarvis
 
-Talk to the bot like an assistant. Type, or send a voice note. A voice note gets a spoken answer in a British butler voice, with the text underneath so you can check what it heard.
+Jarvis is an assistant you talk to. Open the app, tap the circle, speak, and he answers out loud. Turn on **Hands-free** and he listens again after each answer, so it runs like a call.
 
-Today Jarvis answers questions, thinks things through with you, and prepares Grab rides and food (below). It cannot yet read email or your calendar or look up live information, and it says so when asked.
+### Get the app on your phone
+1. In Telegram, send `/app` to the bot and tap **Open Jarvis**.
+2. If the page opens inside Telegram, tap ⋮ and choose **Open in Chrome**. Listening needs Chrome.
+3. In Chrome, tap ⋮ and choose **Add to Home screen**.
+4. Open Jarvis from the home screen, tap the circle and allow the microphone.
+
+The link from `/app` carries a private key that unlocks the app on that phone. Keep it to yourself. `/app new` makes a new key and locks out the old one.
+
+### What he does today
+* Answers questions and thinks things through with you.
+* Reads your briefing whenever you ask: "my briefing", "headlines", or `/brief` in Telegram. It uses the same picks as the 7 AM message, read fresh from your three projects.
+* Prepares Grab rides and food (below). The app shows the **Open in Grab** button.
+* He cannot yet read email or your calendar or look up live information, and says so when asked.
+
+Telegram still works too: type to the bot, or send a voice note and get a voice note back.
 
 ### What runs it, all on free allowances
 | Job | Service |
 |---|---|
-| Hearing your voice note | Cloudflare Workers AI (Whisper) |
+| Hearing you in the app | Your phone (Chrome's speech recognition) |
+| Hearing a Telegram voice note | Cloudflare Workers AI (Whisper) |
 | Thinking | A free Workers AI model. Claude is used only if you set `BRAIN = "claude"` in `grab/wrangler.toml` and add `ANTHROPIC_API_KEY`, which is paid |
-| Speaking | Google Cloud Text-to-Speech, if `GOOGLE_TTS_KEY` is set. Otherwise a free Workers AI voice |
+| Speaking | A Workers AI voice, or Google Cloud Text-to-Speech if `GOOGLE_TTS_KEY` is set. When neither can be spared, your phone's own voice |
+| The briefing | Read straight from your three projects. No AI involved |
+
+### It cannot charge you
+* Cloudflare's free plan has no overage: when the daily Workers AI allowance runs out, requests fail until it resets. Check **Workers & Pages → Plans** shows **Free**.
+* Jarvis also keeps his own estimate of what he uses and stops at `DAILY_NEURON_BUDGET`, below Cloudflare's 10,000 a day. It resets at 8 AM Malaysia time.
+* The Workers AI voice is the costly part. Once only `VOICE_RESERVE` is left, your phone's own voice takes over and the rest is kept for thinking. Expect roughly 30 spoken answers a day in the better voice, then the phone's voice.
+* With the budget spent, the briefing and plain Grab requests such as `ride to KLCC` keep working.
+* The paid Anthropic API is never called unless you switch `BRAIN` to `claude`.
+* Google's voice is off until you add its key, and capped below its free allowance when on.
 
 ### Turn on the Google voice (optional)
 1. In the [Google Cloud console](https://console.cloud.google.com), create a project and enable **Cloud Text-to-Speech API**. Google asks for a billing account even for free use.
@@ -63,18 +87,15 @@ Today Jarvis answers questions, thinks things through with you, and prepares Gra
 3. Add it as a repository secret named `GOOGLE_TTS_KEY`, then run **Actions → Connect Grab helper**.
 4. In Google Cloud **Billing → Budgets & alerts**, add a small budget alert as a second guard.
 
-The Worker stops using Google for the month at `TTS_MONTHLY_CHAR_CAP` characters (set in `grab/wrangler.toml`, below Google's free allowance) and switches to the free Workers AI voice, so the voice cannot run up a bill. Change the voice with `TTS_VOICE`.
-
-### It cannot charge you
-* Cloudflare's free plan has no overage: when the daily Workers AI allowance runs out, requests fail until it resets. Check **Workers & Pages → Plans** shows **Free**.
-* Jarvis also stops at `DAILY_AI_LIMIT` requests a day (30 by default) and tells you so. It resets at 8 AM Malaysia time. Plain Grab requests such as `ride to KLCC` keep working.
-* The paid Anthropic API is never called unless you switch `BRAIN` to `claude`.
-* Google's voice is off until you add its key, and capped below its free allowance when on.
+The Worker stops using Google for the month at `TTS_MONTHLY_CHAR_CAP` characters (set in `grab/wrangler.toml`, below Google's free allowance). Change the voice with `TTS_VOICE`.
 
 ### Good to know
-* Voice notes are limited to two minutes.
+* The app listens only while it is open on screen. Android does not let a web app listen with the phone locked.
+* Hands-free stops listening after two silences and keeps the screen awake while it is on.
 * Jarvis remembers the last few exchanges for follow-up questions and forgets them after three quiet hours.
-* To hear and speak, the Worker has to download your voice note and upload its reply, and both need the bot token. The **Connect Grab helper** workflow therefore stores the token in the Worker's private KV storage on Cloudflare. Typed messages still need no token.
+* Telegram voice notes are limited to two minutes.
+* To handle Telegram voice notes the Worker has to download your note and upload its reply, and both need the bot token. The **Connect Grab helper** workflow therefore stores the token in the Worker's private KV storage on Cloudflare.
+* The briefing's story rules live in two places: `rules.yml` for the 7 AM message and the top of the briefing section in `grab/worker.js` for Jarvis. Change both together.
 
 ## Grab helper
 
@@ -124,5 +145,5 @@ The first alert check only records what's already out there, so you aren't flood
 | `bot.py` | Builds and sends the messages |
 | `rules.yml` | Sources, alert rules, quiet hours, vendor list |
 | `data/state.json` | What has already been alerted (kept 30 days) |
-| `grab/` | Jarvis and the Grab helper (Cloudflare Worker) and its settings |
+| `grab/` | Jarvis, his app page and the Grab helper (Cloudflare Worker) and its settings |
 | `.github/workflows/` | Morning brief (7:03 AM), alerts (hourly), connect (manual), Grab helper connect |

@@ -22,9 +22,12 @@ BRAIN = "free"
 AI_MODEL = "claude-haiku-5-5"
 FREE_CHAT_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 
-# Requests Jarvis will think about per day (typed or spoken). Sized to stay inside
-# Cloudflare's free daily Workers AI allowance. After that he waits until 8 AM.
-DAILY_AI_LIMIT = "30"
+# Cloudflare gives 10,000 free Workers AI "neurons" a day. Jarvis estimates what he
+# uses and stops at this budget, then waits until 8 AM. The Workers AI voice is the
+# costly part, so once only VOICE_RESERVE is left the phone's own voice takes over
+# and the rest is kept for thinking.
+DAILY_NEURON_BUDGET = "7000"
+VOICE_RESERVE = "2000"
 
 # Voice. Google's British voice is used when the GOOGLE_TTS_KEY secret is set.
 # The cap stops Google use for the month before its free allowance (1 million
