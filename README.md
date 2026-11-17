@@ -59,10 +59,29 @@ The link from `/app` carries a private key that unlocks the app on that phone. K
 ### What he does today
 * Answers questions and thinks things through with you.
 * Reads your briefing whenever you ask: "my briefing", "headlines", or `/brief` in Telegram. It uses the same picks as the 7 AM message, read fresh from your three projects.
+* Reads your calendar and unread email once Google is connected (below): "what's on today", "any meetings tomorrow", "any new email". The briefing then opens with the day's calendar.
 * Prepares Grab rides and food (below). The app shows the **Open in Grab** button.
-* He cannot yet read email or your calendar or look up live information, and says so when asked.
+* He cannot yet send email, change your calendar or look up live information, and says so when asked.
 
 Telegram still works too: type to the bot, or send a voice note and get a voice note back.
+
+### Connect Gmail and Calendar (read only)
+Google needs you to register Jarvis as your own app once. It is free and needs no card.
+
+1. Go to the [Google Cloud console](https://console.cloud.google.com), signed in with the Gmail account Jarvis should read. Create a project named Jarvis.
+2. **APIs & Services → Library**: enable **Gmail API** and **Google Calendar API**.
+3. **OAuth consent screen**: app name Jarvis, audience **External**, then **Publish app**. Left in Testing, Google ends the connection every 7 days.
+4. **Credentials → Create OAuth client ID → Web application**. Add this under **Authorized redirect URIs**:
+   `https://intel-bot-grab.raj-intel.workers.dev/jarvis/google/callback`
+5. Add the client ID and secret as repository secrets `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`, then run **Actions → Connect Grab helper**.
+6. In Telegram, send `/google` to the bot and tap **Connect Google**. Google will not sign in inside Telegram, so open the page in Chrome. It warns that the app is unverified because it is your own: choose **Advanced** and continue.
+
+What to know:
+* Jarvis asks Google for read access only. He cannot send, change or delete anything.
+* He reads sender, subject and the short preview of unread inbox mail from the last two days, skipping promotions and social, and the day's events on your main calendar. He never fetches full message bodies.
+* Summaries are built by plain code. Email and calendar text is not sent to the thinking model when you ask for them. What Jarvis said stays in his short conversation memory for follow-up questions, and the spoken answer passes through the voice service.
+* The connection is stored in the Worker's private KV storage. `/google off` revokes it with Google and deletes it. You can also remove it at myaccount.google.com under third-party access.
+* If Jarvis says Google isn't connected after it was, Google has ended the connection. Send `/google` again.
 
 ### What runs it, all on free allowances
 | Job | Service |
@@ -72,12 +91,13 @@ Telegram still works too: type to the bot, or send a voice note and get a voice 
 | Thinking | A free Workers AI model. Claude is used only if you set `BRAIN = "claude"` in `grab/wrangler.toml` and add `ANTHROPIC_API_KEY`, which is paid |
 | Speaking | A Workers AI voice, or Google Cloud Text-to-Speech if `GOOGLE_TTS_KEY` is set. When neither can be spared, your phone's own voice |
 | The briefing | Read straight from your three projects. No AI involved |
+| Calendar and email | Google's own APIs, free for personal use. No AI involved |
 
 ### It cannot charge you
 * Cloudflare's free plan has no overage: when the daily Workers AI allowance runs out, requests fail until it resets. Check **Workers & Pages → Plans** shows **Free**.
 * Jarvis also keeps his own estimate of what he uses and stops at `DAILY_NEURON_BUDGET`, below Cloudflare's 10,000 a day. It resets at 8 AM Malaysia time.
 * The Workers AI voice is the costly part. Once only `VOICE_RESERVE` is left, your phone's own voice takes over and the rest is kept for thinking. Expect roughly 30 spoken answers a day in the better voice, then the phone's voice.
-* With the budget spent, the briefing and plain Grab requests such as `ride to KLCC` keep working.
+* With the budget spent, the briefing, calendar, inbox and plain Grab requests such as `ride to KLCC` keep working.
 * The paid Anthropic API is never called unless you switch `BRAIN` to `claude`.
 * Google's voice is off until you add its key, and capped below its free allowance when on.
 
