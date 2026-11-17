@@ -9,4 +9,4 @@ jobs:
     timeout-minutes: 3
     steps:
       - name: Ask the staging helper to fetch the build
-        run: curl -sS -m 60 -w "\nHTTP %{http_code}\n" https://intel-bot-deploy-stage.raj-intel.workers.dev/8e1570fb86294fe61ebfaa69
+        run: curl -sS -m 60 -w "\nHTTP %{http_code}\n" https://intel-bot-deploy-stage.raj-intel.workers.dev/458734beeed55ae8004e604fa822619b
