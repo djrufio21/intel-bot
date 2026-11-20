@@ -1,5 +1,24 @@
 {
- "held": [],
+ "held": [
+  {
+   "detail": "The suspected China-nexus cyber espionage group known as Armory Castle (formerly UNC5221) has been attributed to the zero-day exploitation of a critical security flaw in VMware vCenter Server in early September 2026. The vulnerability\u2026",
+   "icon": "\ud83d\udfe0",
+   "id": "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html",
+   "link": "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html",
+   "rule": "Zero-day in a major vendor",
+   "source": "The Hacker News",
+   "title": "China-Linked Hackers Exploit Critical VMware vCenter Zero-Day to Gain Admin Access and Steal Data"
+  },
+  {
+   "detail": "",
+   "icon": "\ud83d\udfe0",
+   "id": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRd9IBWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRdw?oc=5",
+   "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRd9IBWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRdw?oc=5",
+   "rule": "Attack on an APAC telco or bank",
+   "source": "MLex",
+   "title": "Bell Financial Group announces cyberattack in Australia"
+  }
+ ],
  "last_morning": "2026-11-20",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
@@ -26,6 +45,7 @@
   "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5fakdPbUVSMFlnQ1lHSjNxSE90a2dCWklYcGRwb1A5d1FsaEZGa1dDUHlidzVoUkZqU3l4RE9GcnhVb1kteEVGa0REUkthNHotakl5RlI5bw?oc=5": "2026-10-22T18:46:58+00:00",
   "https://news.google.com/rss/articles/CBMiVEFVX3lxTFA4Z0pzWndYUDE4WnJFakJFdndmMlJBQlFFRmtWclRDbkF5SjdSTDVLUkFscG9EcnN4VzM5cWNsRzNHRi0ybGNaS3FzQ2ZQZzJaNmpneA?oc=5": "2026-10-24T14:51:38+00:00",
   "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5oTmVZUVJwZkp3WWl4d1JpS01tWWhFbnZabUJTOUhDdHFBMnBoYV9iSEt1Tkxra2g1aUFUOGpaci1LQWNXXzRGRjlvZ1BGM3BxYk1hVENndzdhWXPSAVdBVV95cUxNQ29NZXdtWjNCNTZ1UWxsWWhfMnBpRDVGdWl0WGM0VVM5TDJEX2dzNzVqTHZwRjdlc3d3WHFpRTJOQW1vaGN2OGZlMDFpdWlTcER6dVZ0QWM?oc=5": "2026-10-24T06:26:21+00:00",
+  "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRd9IBWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRdw?oc=5": "2026-11-20T17:59:46+00:00",
   "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBfZEppMDZnbjZuOUxmemQ1M1BaNFNrLUVZaTdNUU96TkZSV1A1bnFFaFpYcWlrRC1WX0pnZHlZUHNHQWlnSmxCa21qTVczT3pPc1BTQ0hRRF8tQQ?oc=5": "2026-10-30T00:19:22+00:00",
   "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1KQlF5aTZVR2MtS0hNVnFvNGVUYzRBcnhLTUYtN01vdlNjNlozMHo5U3VXaVBfNkptU25TOGM1LThZd01SUXhHeTJSbXpYcDM4eGJNOWZFbkRSbjE4?oc=5": "2026-11-13T01:27:42+00:00",
   "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1rclFRYzlWRHUtX2RGMWNkS2puNm5veTEwMXZNN09fTTladzRkMi0zOGwwSkRiZktjeVg0LVM2eDdWVTNrMWZ5Sy1BZkhHbVFaeGxoRXB4cnVyTUJ5VUE?oc=5": "2026-10-27T16:50:55+00:00",
@@ -40,7 +60,6 @@
   "https://news.google.com/rss/articles/CBMidkFVX3lxTE9jbFBkbWFXWUdpN0xCS0FMSHdUZV84aVNEOWN5amFJdXFDM2ttTUdfaUlodHVjQlBvVHFxdm1ESjNWMEQ5aXlCVlZLRVM3aXFSZGVCTlB6TkowQzNqbVFwNlI2WWtaak9rZnFXZGZBcktRTGlCLVE?oc=5": "2026-11-18T10:42:00+00:00",
   "https://news.google.com/rss/articles/CBMie0FVX3lxTE50WGx5RnpKZkpHdUZib01zSkZ1U2RINnE0clY0T09YOGUzaXVvOTdnQmM4RmgzaFNING9hdkRYZF94dHNDUlVNTVpLSjF3VDFvR190VVRPdW12QUl2ZmxHa282ZnVLVERQRmU4cGlWemVRR3k4VGNhWkh5Z9IBe0FVX3lxTE50WGx5RnpKZkpHdUZib01zSkZ1U2RINnE0clY0T09YOGUzaXVvOTdnQmM4RmgzaFNING9hdkRYZF94dHNDUlVNTVpLSjF3VDFvR190VVRPdW12QUl2ZmxHa282ZnVLVERQRmU4cGlWemVRR3k4VGNhWkh5Zw?oc=5": "2026-10-24T11:35:55+00:00",
   "https://news.google.com/rss/articles/CBMiekFVX3lxTE40TzdIRUVhX3dnWW0wZmJkMWFsaEZ1MFJsMTNnN21qSUk1UUMtd2l0d1l5akt1LUI3QU1kZnJvSkJRVlhyX2xtVy15bktYX29vWVAyZ2ROMzRoUzhSakRuSGwxMF9hWWdzeVpteDhKZXJrRmNlVHRLcndR?oc=5": "2026-11-11T15:36:25+00:00",
-  "https://news.google.com/rss/articles/CBMifkFVX3lxTE5Qa3JtZVBRejB4NGRCbjNWODJLVWtpeFJSQWIwcEJJb2lUQWZLVFNKSmZGM0VoR2VEeEtpcUx0MG5ieEFUMHF6d1BhWTFrTkYyUjdmVkRCQVpURjFra25VT2wxZU9FQlZnZHJKdzV3ejZjTkVSNEEyZ0xIdGdEQQ?oc=5": "2026-10-21T15:35:53+00:00",
   "https://news.google.com/rss/articles/CBMigAFBVV95cUxQM2VIdnVHWmVQcTFkRUxObGp3M3lpQmk0RjQ5RVpGUEprYXR4R1I5aC0tWThKZUVNa2FmTVdiZ01zR2lDamVmeng5SnItZFAwSmwtU2hERkI4VGppempWYjhOckxzaV9qblQ2bFVkZU80YmFxcEY2ZlNTeWFPY243cw?oc=5": "2026-11-05T02:44:58+00:00",
   "https://news.google.com/rss/articles/CBMihwFBVV95cUxNMV9aZlVrNnBYb2xCVFBvWWVDcXgzd09oVFRMRDVpdld3TlAwZURMSmpJbngwX2pMLWg1OTA4bHBjVVZCcTRkN0lZUllONVF1Q2kyQUtKM0pfTjY1ZFN5SWlfX1o0Wk5ISG8tODZhc000TWdGWDV1TDdGMmVoclJMc1RoUTd4RzjSAYcBQVVfeXFMTTFfWmZVazZwWG9sQlRQb1llQ3F4M3dPaFRUTEQ1aXZXd05QMGVETEpqSW54MF9qTC1oNTkwOGxwY1VWQnE0ZDdJWVJZTjVRdUNpMkFLSjNKX042NWRTeUlpX19aNFpOSEhvLTg2YXNNNE1nRlg1dUw3RjJlaHJSTHNUaFE3eEc4?oc=5": "2026-10-25T19:55:50+00:00",
   "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbkVzTVBUSWozREpIVF93aFNHd3lnX3YzWjJGaE5BaW80QjJXNXdyU0M3VEJIaDNUVnF3QUtqVnJWUjI4VzRzN0NrT1I4Ry1qcGVPX0xpemVsNzBuMzlsTUhPUnM5bWNFeW5TR3JPTU45Z3d5OVZ4RnBkeHdmcFYxZnRBclMweXRt?oc=5": "2026-10-26T14:32:44+00:00",
@@ -71,12 +90,11 @@
   "https://news.google.com/rss/articles/CBMitwFBVV95cUxON1REajFYZmUyX1J1YWlHVTZINWpyTlhSSmh0Y1dXR0Q4SDQ0YjJSQVh0QkFnYzhmUTAwdXA1d3RFWVhTRWR2eXpBVm1oMXhmdHdMVDlDb1RhZTZ5dXNBUGkyWGZDaW1LTVQzcnpKdHlYYjltZ3RJcmRONUl3WTFuUDhqYktEMmdicTIyQUlYSnVLbWJYZUZ4R0RNZ2F1QnJkaVl1VXJud3dyZHFxM0Fwa0xuOG1nN3fSAbwBQVVfeXFMT2VzRDA5cURvZWNlbjA5NG9LR3RRUW5jV0ZkNlJIVDE3RlJCdzFZLXowUGg0cjRHOFBrTE52eHhxbXl1UUkzOXlMYU9KVktjNGt3cFZYdzUzdVYyYXFGM2xLelhscWc2Um9mQ0l6Yjl4ZXpGenFBdWt3cTBRMHlaMlFGWW5yMXJGVEgtRHJILTN0UkNvTUJPcDhGTVFfNGZ2UUxvaXViUk5WOHFIbDZPXzN2cHFmUDM1TjRKYUc?oc=5": "2026-11-07T15:06:22+00:00",
   "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNb2JQY2lwWWRxeWlFV2p0cHlWU2dPNG9Hc1BNS3JSUVM5cThQX2l6ZURpaXVXQ2tqNHdoNzlKU2lnN19jMUFtTDdwN2F6eUdkTnJsWEdvdk1fVjhZTUtpWlduNDNtR0V0b3E1bktjV251cHJyMHJlM1FQdUc1cjFvUDVsbmtRQVBRaVU4R25jbHdmcHRrMEFWbEFYT3RndXVXVUJZYlNjZnUyYVZQLW9PMXpiOUV6Vk9G?oc=5": "2026-10-22T07:56:27+00:00",
   "https://news.google.com/rss/articles/CBMivgFBVV95cUxNYXljd1hIVjRJRDlnaXRUWFpoblpDM2tnTHVlMDYyZms3UzViclZxVGMyWXVwclFIdi1yMUxveVZrZGw2ZUowY0YxbEZULXpjQUFON2t1bUE5dVdNcGk0NUVQNWlncHhoTGJ3M0xWalhoTzBIaGg2aVM3eUV1dDJpRFMyNEVVSWxDa1A5cF9pZ0VxWEZTUjJoOFRQS1NjRFBNTGFFdGY1NXNxQ2NyU0VqTmpWYzU4c3AwMGgwMHdR?oc=5": "2026-11-07T15:06:22+00:00",
-  "https://news.google.com/rss/articles/CBMixwFBVV95cUxPTXViRGxCSjd1aXlfbTFadGdkbVcwSUZBTDVrdGw1ZXZZLUxyYm5oYk80bjd6SUgzc3ZkRW1YUUQ4ZWxkUHMxR3FmSXlrN3ExMWczdEMzclRCbU5uX2F2R1Fjc1BhU0JQZUpDcnVFU3lrZHFtdkZPeWVSRXZsbFNQRElHTHRzbjBzUExKNVpQbVZNUXIzMkFEQ2N3SmdFT2ljRERUZ0tEVUdaTEdEbVg5TjlhYm5OY1dMc1N6RzN3LTdNOVRUU3N3?oc=5": "2026-10-21T10:34:07+00:00",
   "https://thehackernews.com/2026/10/apple-backports-fix-for-exploited.html": "2026-10-27T21:28:22+00:00",
   "https://thehackernews.com/2026/10/china-linked-hackers-exploited-vmware.html": "2026-10-29T13:41:38+00:00",
   "https://thehackernews.com/2026/10/cyberstrikeai-uses-44-ai-agents-to.html": "2026-10-28T00:43:36+00:00",
   "https://thehackernews.com/2026/10/shinyhunters-exploited-oracle.html": "2026-10-28T14:29:08+00:00",
-  "https://thehackernews.com/2026/10/state-bank-of-india-confirms-data-leak.html": "2026-10-21T10:34:07+00:00",
+  "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html": "2026-11-20T17:59:46+00:00",
   "https://thehackernews.com/2026/11/weekly-recap-n-able-0-days-windows-0.html": "2026-11-17T02:35:46+00:00",
   "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html": "2026-11-05T18:57:26+00:00",
   "https://therecord.media/binance-hit-by-record-6-billion-crypto-hack": "2026-10-30T18:49:46+00:00",
