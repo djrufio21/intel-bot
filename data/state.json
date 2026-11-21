@@ -1,25 +1,6 @@
 {
- "held": [
-  {
-   "detail": "The suspected China-nexus cyber espionage group known as Armory Castle (formerly UNC5221) has been attributed to the zero-day exploitation of a critical security flaw in VMware vCenter Server in early September 2026. The vulnerability\u2026",
-   "icon": "\ud83d\udfe0",
-   "id": "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html",
-   "link": "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html",
-   "rule": "Zero-day in a major vendor",
-   "source": "The Hacker News",
-   "title": "China-Linked Hackers Exploit Critical VMware vCenter Zero-Day to Gain Admin Access and Steal Data"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRd9IBWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRdw?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRd9IBWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRdw?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "MLex",
-   "title": "Bell Financial Group announces cyberattack in Australia"
-  }
- ],
- "last_morning": "2026-11-20",
+ "held": [],
+ "last_morning": "2026-11-21",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
