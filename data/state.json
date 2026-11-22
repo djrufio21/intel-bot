@@ -1,34 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQSmpncGRoYWoxZHIzY0ZuZURHVW43Q3lyRm5oYlJGbHZWTVM3Mm80ZGlhOUhEbmM4QUg2cnFYS01hWm9lQm1WSXcwdk9sUTZoOWVpRkFxbFZDNjNpcVYxaDk0ejRQajlSWVdfREFrS2hBa3dtdDd4SmZQUEFXUEI2Yll6aEJOcFZlWWdzeXdzeWFfSEZUYXF4cWx4R3pjQmtjaXE0REV2Um80TWoza0Yw?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQSmpncGRoYWoxZHIzY0ZuZURHVW43Q3lyRm5oYlJGbHZWTVM3Mm80ZGlhOUhEbmM4QUg2cnFYS01hWm9lQm1WSXcwdk9sUTZoOWVpRkFxbFZDNjNpcVYxaDk0ejRQajlSWVdfREFrS2hBa3dtdDd4SmZQUEFXUEI2Yll6aEJOcFZlWWdzeXdzeWFfSEZUYXF4cWx4R3pjQmtjaXE0REV2Um80TWoza0Yw?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "varindia",
-   "title": "Indonesia's Financial Sector Hit by 1.2 Million Cyberattack Attempts in 24 Hours"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPU01SMUF0eG1tMXdIU1RoenExN1JkU2RtTTgzUE52Z0xHNi1uelZTdlh0SWc5WlQ1QkRKZGNwWmxSUjNPQ2xJaHNTT0o2eUN6MzRCTjA5T1d0dTExSXByc0dwVUotc1RrWjFEYTU1NEdtZWZ5Qlh4ekJ4S0loaWNVTUN1TlNmUmJSNmVMTE1VOFFfTmRzMTVWbmpZU3BhLVRXR0RzdGJMQkw1Uk9fQktFdGZaYXk0T1BSM0hfNGxn?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPU01SMUF0eG1tMXdIU1RoenExN1JkU2RtTTgzUE52Z0xHNi1uelZTdlh0SWc5WlQ1QkRKZGNwWmxSUjNPQ2xJaHNTT0o2eUN6MzRCTjA5T1d0dTExSXByc0dwVUotc1RrWjFEYTU1NEdtZWZ5Qlh4ekJ4S0loaWNVTUN1TlNmUmJSNmVMTE1VOFFfTmRzMTVWbmpZU3BhLVRXR0RzdGJMQkw1Uk9fQktFdGZaYXk0T1BSM0hfNGxn?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "NewsBytes",
-   "title": "CERT-In warns AI-armed hackers targeting business payment systems in India"
-  },
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOM09lV3JwX3NsaFE1Uy1zRFp2QU80MkxCWVZsd0dfWEo3WjJNWWJPZTBQbWhiZzFHTm9LUjVaWVRITjkzMDNZZlVQN3REVmwyd2M4T2tRN0JZam1BRVVDVVlkTEFwYmlZNENQdzdnUEU5Y3B1WWc2cXZnanVXbkVwcTNR?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOM09lV3JwX3NsaFE1Uy1zRFp2QU80MkxCWVZsd0dfWEo3WjJNWWJPZTBQbWhiZzFHTm9LUjVaWVRITjkzMDNZZlVQN3REVmwyd2M4T2tRN0JZam1BRVVDVVlkTEFwYmlZNENQdzdnUEU5Y3B1WWc2cXZnanVXbkVwcTNR?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "theopenpress.in",
-   "title": "CERT-In AI Alert: Hackers Target Payment Systems in India"
-  }
- ],
- "last_morning": "2026-11-21",
+ "held": [],
+ "last_morning": "2026-11-22",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
