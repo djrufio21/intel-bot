@@ -1,16 +1,6 @@
 {
- "held": [
-  {
-   "detail": "",
-   "icon": "\ud83d\udfe0",
-   "id": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPeEFDNDdSbXZ3cDhIYmZOeVduYVFMbUs5bTBGV3FQNy0yR3hzdzJJY3o1SEhSX2cwYnk4RnhmRDlaNTFrX1oxd0s3emdUcEFSLTdVUEtlZEl1dVJqNlNWMVlJYUhVSDNRZEgzMkJ3MXBwdU9KcUlRTm5oUkd6WENTedIBlAFBVV95cUxQSW13SGcxOGtVeTliZERmTURwSjE4anFMWW5fQXFXS2RLMkVlb1dIdXp4ajF0MlJOVnFkdXpYcWhKSzFSZEdyaWYxSUtuMl9FVWQybGpQWFJkRjNidnBIUDhmd3BiSDNFNGg3Wmd1dFdWUXZvemlxNmp4dE9IQjVkMjZTU0piRHhFVE1NVnpWVmt1aWt4?oc=5",
-   "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPeEFDNDdSbXZ3cDhIYmZOeVduYVFMbUs5bTBGV3FQNy0yR3hzdzJJY3o1SEhSX2cwYnk4RnhmRDlaNTFrX1oxd0s3emdUcEFSLTdVUEtlZEl1dVJqNlNWMVlJYUhVSDNRZEgzMkJ3MXBwdU9KcUlRTm5oUkd6WENTedIBlAFBVV95cUxQSW13SGcxOGtVeTliZERmTURwSjE4anFMWW5fQXFXS2RLMkVlb1dIdXp4ajF0MlJOVnFkdXpYcWhKSzFSZEdyaWYxSUtuMl9FVWQybGpQWFJkRjNidnBIUDhmd3BiSDNFNGg3Wmd1dFdWUXZvemlxNmp4dE9IQjVkMjZTU0piRHhFVE1NVnpWVmt1aWt4?oc=5",
-   "rule": "Attack on an APAC telco or bank",
-   "source": "Chosunbiz",
-   "title": "Cyberattack attempts surge against South Korea's financial regulators"
-  }
- ],
- "last_morning": "2026-11-23",
+ "held": [],
+ "last_morning": "2026-11-24",
  "seeded": "2026-10-16T10:35:53+00:00",
  "sent": {
   "CVE-2024-27834": "2026-11-05T02:44:58+00:00",
