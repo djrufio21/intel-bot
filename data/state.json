@@ -29,7 +29,6 @@
   "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRd9IBWkFVX3lxTE1vYUd4MWoxdThpbnc3dHc1SUJzNlFuOUNDVWhCS0JKU1YxRUNrV1B6U2JfcERSbXc3cWJTc2FBWmRpU2p4TG9JRFgwT0NiUi0ydzRjdVV3cTJRdw?oc=5": "2026-11-20T17:59:46+00:00",
   "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBfZEppMDZnbjZuOUxmemQ1M1BaNFNrLUVZaTdNUU96TkZSV1A1bnFFaFpYcWlrRC1WX0pnZHlZUHNHQWlnSmxCa21qTVczT3pPc1BTQ0hRRF8tQQ?oc=5": "2026-10-30T00:19:22+00:00",
   "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1KQlF5aTZVR2MtS0hNVnFvNGVUYzRBcnhLTUYtN01vdlNjNlozMHo5U3VXaVBfNkptU25TOGM1LThZd01SUXhHeTJSbXpYcDM4eGJNOWZFbkRSbjE4?oc=5": "2026-11-13T01:27:42+00:00",
-  "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1rclFRYzlWRHUtX2RGMWNkS2puNm5veTEwMXZNN09fTTladzRkMi0zOGwwSkRiZktjeVg0LVM2eDdWVTNrMWZ5Sy1BZkhHbVFaeGxoRXB4cnVyTUJ5VUE?oc=5": "2026-10-27T16:50:55+00:00",
   "https://news.google.com/rss/articles/CBMiY0FVX3lxTE8tRmctbHVvNFk2cGJGOG5zcU5Jb0tuSXRnczBJem9WRy01a0xLaERpQlZVLUJ3RzVPeGhUb1RHcWtwM0ZibVBxRkpsSkVMMV9sRXczX1BfOVhjamhMOU5OMXlWSQ?oc=5": "2026-11-06T00:33:22+00:00",
   "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9SWnRRQmZORC1KMTE0dGlkQTZtTVBvREhna2ZGM3pJNXFyNlVmbGNWRXU2Mk4tRy1IYTVFR3V3cE9YeGgyT25XandZM1lqV2w4MmkwcWhjUFZlcUJqcmRSd2I0QQ?oc=5": "2026-11-12T20:25:14+00:00",
   "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1hTlR5WUZpUDIwTi1FY0hPUy1ublNqdzhhelBkaExWWDV6dUVfdUdrTTZYc1p1RHFuLXpRUEwxRWZ6UFR0cTFCY20xWnNlZmxySVJxY0tSc2ZRSVFIUHVOWkVSWkFtdw?oc=5": "2026-11-24T12:55:05+00:00",
@@ -78,7 +77,6 @@
   "https://thehackernews.com/2026/11/weekly-recap-vmware-0-day-java4shell.html": "2026-11-24T02:34:02+00:00",
   "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html": "2026-11-05T18:57:26+00:00",
   "https://therecord.media/binance-hit-by-record-6-billion-crypto-hack": "2026-10-30T18:49:46+00:00",
-  "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/": "2026-10-27T16:50:55+00:00",
   "https://www.bleepingcomputer.com/news/microsoft/microsoft-november-2026-patch-tuesday-fixes-1-235-flaws-outlook-zero-day/": "2026-11-11T07:04:27+00:00",
   "https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/": "2026-11-13T22:50:47+00:00",
   "https://www.bleepingcomputer.com/news/security/cisco-warns-of-firewall-zero-day-exploited-to-crash-ssl-vpn-devices/": "2026-10-29T19:50:08+00:00",
@@ -92,9 +90,7 @@
   "https://www.securityweek.com/cisco-sd-wan-zero-day-exploitation-tied-to-volt-typhoons-silent-train-network/": "2026-10-29T19:50:08+00:00",
   "https://www.securityweek.com/exploited-outlook-zero-day-among-1094-flaws-patched-by-microsoft/": "2026-11-10T23:42:13+00:00",
   "https://www.securityweek.com/hackers-steal-2-6-million-records-from-sonys-japanese-isp-so-net/": "2026-10-29T19:50:08+00:00",
-  "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/": "2026-10-27T16:50:55+00:00",
   "https://www.securityweek.com/newly-patched-vmware-vcenter-flaw-exploited-as-zero-day-by-chinese-apt/": "2026-11-20T00:55:13+00:00",
-  "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/": "2026-10-27T16:50:55+00:00",
   "https://www.securityweek.com/zyxel-switch-hacks-blamed-on-patched-flaw-actually-exploited-a-zero-day/": "2026-11-05T18:57:26+00:00"
  }
 }
